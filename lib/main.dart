@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jimoney_frontend/Login/presentation/login_afterlogoutpage.dart';
+import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 void main() {
   runApp(const App());
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginAfterLogoutPage(),
+      home: RegisterPage(),
     );
   }
 }
