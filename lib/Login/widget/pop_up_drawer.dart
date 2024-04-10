@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jimoney_frontend/Register/presentation/login_page.dart';
+import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 class PopUpDrawer extends StatelessWidget {
   PopUpDrawer({super.key});
@@ -18,7 +20,10 @@ class PopUpDrawer extends StatelessWidget {
         children: [
           SizedBox(height: 50),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (ctx) => RegisterPage()));
+            },
             child: Text(
               'Register',
               style: TextStyle(color: Colors.white, fontSize: 16),
@@ -33,7 +38,10 @@ class PopUpDrawer extends StatelessWidget {
           ),
           SizedBox(height: 25),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (ctx) => LoginPage()));
+            },
             child: Text(
               'Already have account?',
               style: TextStyle(color: Colors.black, fontSize: 16),

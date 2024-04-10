@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -140,7 +141,8 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (ctx) => LoginPage()));
                 },
                 child: Text(
                   "Sign In",
