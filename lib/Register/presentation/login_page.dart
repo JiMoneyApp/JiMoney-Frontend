@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,54 +23,28 @@ class _LoginPageState extends State<LoginPage> {
             height: 370,
             width: 350,
             child: Scaffold(
-              body: Image(image: AssetImage('lib/assets/logo.png'),),
+              body: Image(
+                image: AssetImage('lib/assets/logo.png'),
+              ),
               backgroundColor: Color(0xFF559BCF),
             ),
           ),
+          _usernameField(),
+          _passwordField(),
           Container(
-            height: 100,
-            width: 350,
-            alignment: Alignment.bottomCenter,
-            child: Material(
-              borderRadius: BorderRadius.circular(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  hintText: "Username"
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 100,
-            width: 350,
-            alignment: Alignment.bottomCenter,
-            child: Material(
-              borderRadius: BorderRadius.circular(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  hintText: "Password",
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 80,
-            width: 350,
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
-            child: Text(
-              "Forget password?",
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 13,
-                color: Colors.black
-              ),
-            )
-          ),
+              height: 80,
+              width: 350,
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+              child: Text(
+                "Forget password?",
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 13,
+                    color: Colors.red.shade100),
+              )),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: () {},
             child: Text(
               "Login",
               style: TextStyle(color: Colors.black, fontSize: 16),
@@ -77,8 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               minimumSize: Size(350, 50),
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.circular(10)),
               shadowColor: Colors.black,
             ),
           ),
@@ -87,31 +62,31 @@ class _LoginPageState extends State<LoginPage> {
             color: Colors.white,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                alignment: Alignment.topRight,
-                height: 40,
-                width: 220,
-                child: Text(
-                  "Don't have an account?",
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 13,
-                    color: Colors.black,
-                  ),
+              Text(
+                "Don't have an account?",
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 16,
+                  color: Colors.grey.shade300,
                 ),
               ),
-              Container(
-                height: 40,
-                width: 200,
-                padding: EdgeInsets.fromLTRB(35, 0, 0, 0),
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 13,
-                    color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => RegisterPage()));
+                  },
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      decoration: TextDecoration.none,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -121,4 +96,66 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+Widget _usernameField() {
+  return Container(
+    height: 100,
+    width: 350,
+    alignment: Alignment.bottomCenter,
+    child: Material(
+      borderRadius: BorderRadius.circular(10),
+      child: TextField(
+        autofillHints: const [AutofillHints.password],
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.blue,
+        //onChanged: () {}, // 將password存入
+        onEditingComplete: () {
+          debugPrint("password edit completed!");
+          TextInput.finishAutofillContext();
+        },
+        // obscureText: !state
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.blue, width: 4.0)),
+          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: "Username",
+          hintStyle: TextStyle(fontSize: 14),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _passwordField() {
+  return Container(
+    height: 100,
+    width: 350,
+    alignment: Alignment.bottomCenter,
+    child: Material(
+      borderRadius: BorderRadius.circular(10),
+      child: TextField(
+        autofillHints: const [AutofillHints.password],
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.blue,
+        //onChanged: () {}, // 將password存入
+        onEditingComplete: () {
+          debugPrint("password edit completed!");
+          TextInput.finishAutofillContext();
+        },
+        // obscureText: !state
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.blue, width: 4.0)),
+          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: "Password",
+          hintStyle: TextStyle(fontSize: 14),
+        ),
+      ),
+    ),
+  );
 }
