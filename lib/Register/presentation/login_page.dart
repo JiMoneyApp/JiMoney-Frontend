@@ -17,7 +17,16 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           Container(
-            height: 510,
+            padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
+            height: 370,
+            width: 350,
+            child: Scaffold(
+              body: Image(image: AssetImage('lib/assets/logo.png'),),
+              backgroundColor: Color(0xFF559BCF),
+            ),
+          ),
+          Container(
+            height: 100,
             width: 350,
             alignment: Alignment.bottomCenter,
             child: Material(
