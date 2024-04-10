@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jimoney_frontend/Login/presentation/login_afterlogoutpage.dart';
+import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 void main() {
