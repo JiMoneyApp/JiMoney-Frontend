@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
@@ -21,8 +22,7 @@ class PopUpDrawer extends StatelessWidget {
           SizedBox(height: 50),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => RegisterPage()));
+              context.push("/register");
             },
             child: Text(
               'Register',
@@ -38,9 +38,8 @@ class PopUpDrawer extends StatelessWidget {
           ),
           SizedBox(height: 25),
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (ctx) => LoginPage()));
+            onPressed: () async {
+              context.push("/login");
             },
             child: Text(
               'Already have account?',

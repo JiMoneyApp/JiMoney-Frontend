@@ -3,6 +3,7 @@ import 'package:jimoney_frontend/Login/widget/pop_up_drawer.dart';
 
 class LoginAfterLogoutPage extends StatefulWidget {
   const LoginAfterLogoutPage({super.key});
+  static String path = "/loginafterlogout";
 
   @override
   State<LoginAfterLogoutPage> createState() => _LoginAfterLogoutPageState();
@@ -18,8 +19,10 @@ class _LoginAfterLogoutPageState extends State<LoginAfterLogoutPage> {
             alignment: AlignmentDirectional.bottomCenter,
             children: <Widget>[
               Container(
-                height: double.infinity,
-                child: Text(''),
+                height: double.maxFinite,
+                child: const Image(
+                  image: AssetImage('lib/assets/loginafterlogoutimage.png'),
+                ),
               ),
               AnimatedContainer(
                 height: 300,

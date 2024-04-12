@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  static String path = "/register";
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -126,23 +129,17 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextButton(
-                onPressed: () {
-                  // Add your logic here
-                },
-                child: Text(
-                  "Already have an account?",
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 13,
-                    color: Colors.black,
-                  ),
+              Text(
+                "Already have an account?",
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 13,
+                  color: Colors.black,
                 ),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (ctx) => LoginPage()));
+                  context.pop();
                 },
                 child: Text(
                   "Sign In",

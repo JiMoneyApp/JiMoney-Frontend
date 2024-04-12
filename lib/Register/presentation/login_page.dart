@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  static String path = "/login";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -76,9 +79,8 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => RegisterPage()));
+                  onPressed: () async {
+                    context.push("/register");
                   },
                   child: Text(
                     "Sign Up",
