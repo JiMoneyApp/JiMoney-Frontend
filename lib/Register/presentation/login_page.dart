@@ -147,7 +147,7 @@ Widget _passwordField() {
           debugPrint("password edit completed!");
           TextInput.finishAutofillContext();
         },
-        // obscureText: !state
+        obscureText: true,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -156,6 +156,16 @@ Widget _passwordField() {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintText: "Password",
           hintStyle: TextStyle(fontSize: 14),
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(right: 6),
+            child: IconButton(
+              iconSize: 18,
+              onPressed: () {},
+              icon: Icon(
+                Icons.visibility_off,
+              ),
+            ),
+          ),
         ),
       ),
     ),

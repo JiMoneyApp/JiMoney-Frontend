@@ -72,36 +72,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 13,
                     color: Colors.black),
               )),
-          // Password
-          Container(
-            height: 130,
-            width: 350,
-            alignment: Alignment.bottomCenter,
-            child: Material(
-              borderRadius: BorderRadius.circular(10),
-              child: TextField(
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    hintText: "Password"),
-              ),
-            ),
-          ),
-          // Confirm Password
-          Container(
-            height: 90,
-            width: 350,
-            alignment: Alignment.bottomCenter,
-            child: Material(
-              borderRadius: BorderRadius.circular(10),
-              child: TextField(
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                    hintText: "Confirm Password"),
-              ),
-            ),
-          ),
+          _password(),
+          _confirmpassword(),
           // Register Button
           Container(
             padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -127,14 +99,14 @@ class _RegisterPageState extends State<RegisterPage> {
           // bottom text
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Already have an account?",
                 style: TextStyle(
                   decoration: TextDecoration.none,
                   fontSize: 13,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               TextButton(
@@ -146,13 +118,71 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(
                     decoration: TextDecoration.none,
                     fontSize: 13,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _password() {
+    return Container(
+      height: 130,
+      width: 350,
+      alignment: Alignment.bottomCenter,
+      child: Material(
+        borderRadius: BorderRadius.circular(10),
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            hintText: "Password",
+            hintStyle: TextStyle(fontSize: 14),
+            suffixIcon: Padding(
+              padding: EdgeInsets.only(right: 6),
+              child: IconButton(
+                iconSize: 18,
+                onPressed: () {},
+                icon: Icon(
+                  Icons.visibility_off,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _confirmpassword() {
+    return Container(
+      height: 90,
+      width: 350,
+      alignment: Alignment.bottomCenter,
+      child: Material(
+        borderRadius: BorderRadius.circular(10),
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            hintText: "Confirm Password",
+            hintStyle: TextStyle(fontSize: 14),
+            suffixIcon: Padding(
+              padding: EdgeInsets.only(right: 6),
+              child: IconButton(
+                iconSize: 18,
+                onPressed: () {},
+                icon: Icon(
+                  Icons.visibility_off,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
