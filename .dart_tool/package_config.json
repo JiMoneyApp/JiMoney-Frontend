@@ -152,6 +152,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "toggle_switch",
+      "rootUri": "file:///Users/kenny/.pub-cache/hosted/pub.dev/toggle_switch-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/kenny/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -170,7 +176,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-10T08:19:27.070833Z",
+  "generated": "2024-04-22T07:39:54.711311Z",
   "generator": "pub",
   "generatorVersion": "3.3.3"
 }
