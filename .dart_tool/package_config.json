@@ -68,14 +68,8 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "get_it",
-      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/get_it-7.6.9",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
       "name": "go_router",
-      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/go_router-13.2.3",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/go_router-14.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -176,6 +170,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "toggle_switch",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/toggle_switch-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -194,7 +194,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-25T02:56:50.628389Z",
+  "generated": "2024-04-25T03:26:11.274861Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }
