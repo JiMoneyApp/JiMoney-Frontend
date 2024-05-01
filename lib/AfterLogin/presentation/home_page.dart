@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/buy_income_show.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/buy_income_switch.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/date_button.dart';
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               width: 120,
             ),
             SizedBox(
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.analytics)),
+              child: IconButton(onPressed: () async{context.push("/analytics");}, icon: Icon(Icons.analytics)),
               width: 120,
             ),
             SizedBox(
