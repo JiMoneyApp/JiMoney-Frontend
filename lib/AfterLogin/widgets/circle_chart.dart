@@ -8,6 +8,7 @@ class CircleChart extends StatefulWidget {
   @override
   State<CircleChart> createState() => _CircleChartState();
 }
+
 class _PieData {
   _PieData(this.xData, this.yData, [this.text]);
   final String xData;
@@ -18,23 +19,30 @@ class _PieData {
 class _CircleChartState extends State<CircleChart> {
   @override
   Widget build(BuildContext context) {
- return Center(
-    child:SfCircularChart(
-    title: ChartTitle(text: 'Total Expeneses'),
-    legend: Legend(isVisible: true),
-    series: <PieSeries<_PieData, String>>[
-      PieSeries<_PieData, String>(
-        explode: true,
-        explodeIndex: 0,
-       
-        xValueMapper: (_PieData data, _) => data.xData,
-        yValueMapper: (_PieData data, _) => data.yData,
-        dataLabelMapper: (_PieData data, _) => data.text,
-        dataLabelSettings: DataLabelSettings(isVisible: true)),
-   ]
-  )
- );
+    return Center(
+        child: Container(
+      child: SfCartesianChart(
+          // Initialize category axis
+          primaryXAxis: CategoryAxis(),
+          series: <LineSeries<SalesData, String>>[
+            LineSeries<SalesData, String>(
+                // Bind data source
+                dataSource: <SalesData>[
+                  SalesData('Jan', 35),
+                  SalesData('Feb', 28),
+                  SalesData('Mar', 34),
+                  SalesData('Apr', 32),
+                  SalesData('May', 40)
+                ],
+                xValueMapper: (SalesData sales, _) => sales.year,
+                yValueMapper: (SalesData sales, _) => sales.sales)
+          ]),
+    ));
+  }
 }
 
-
+class SalesData {
+  SalesData(this.year, this.sales);
+  final String year;
+  final double sales;
 }

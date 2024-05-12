@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		mZLH5WN66w7rCJnq8qxeZ9g6UKs=
+		rCbS5lXlL6K08HkxRxA6BqPgX2A=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		5zV1xabEcHYJSd41V1wdSyIlRns=
+		hHYF8FApkXJglXuRP3sW2g8sC0I=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		o39uDxokF0MEGknOqK+yZFXvsjk=
+		GRcI8V+qBZtf47oSAcygRUXOp8M=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		dlMHlC4kMNAjly7SjmMJn/PdKkc=
+		Vc25oo86EvSv7v6XOx/isJAMOxI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/loginafterlogoutimage.png</key>
 		<data>
@@ -196,9 +196,61 @@
 		<data>
 		Ubat0LvE4LUgCwHeyl0Anx2vnzk=
 		</data>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<data>
+		PKs/nOGrBrFkVnQ77p72ra09ycg=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		3GVxgzH5wPWeoYom9MS6BxqLvt0=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<data>
+		XY5lWV0yiLH/yye9GkKjMptXikQ=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<data>
+		gUmANSL0VBAXi59oMcmI0nYYoXY=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
+		<key>Frameworks/photo_manager.framework/Info.plist</key>
+		<data>
+		3ZNSyCU40/FpEJoc0KCRZoxX7lA=
+		</data>
+		<key>Frameworks/photo_manager.framework/_CodeSignature/CodeResources</key>
+		<data>
+		VL8vUbxhnmbdAGj1peQtGDAc6Tw=
+		</data>
+		<key>Frameworks/photo_manager.framework/photo_manager</key>
+		<data>
+		S5mmtJl0nI4f7N81Q3mWP1CrEhI=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<data>
+		FvIRPtjUkkiEVn4Ek4R0d+vmW6I=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		D8p1z0So9ZVwW9ExxDUYZUUIDKs=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<data>
+		lbUdj2xw4wW1WyW1LquXfkpXsto=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/Info.plist</key>
+		<data>
+		ZIkznHXYPvcH1YkL7S9nQZw/IvQ=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		1GXAkHkCUO5TpopaD5L0ZTUuWSU=
+		uP0ixpnHdMqofM/SGJ15B1jQFa0=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -281,7 +333,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7PZoQNWEdi0Hsypk3fdb/EpNHBxKMafBCXmHy5CzbsA=
+			RCfDp5ZQphRW1qq9wEXX4lUbFEovmuS3KvKlxfwlZok=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -295,7 +347,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/sdCtppCq8SKlGuAWj7CTxyRtmo7yYgtfPXwkDGtEDY=
+			WLJWAgcl1HDaRtfF1JBTKhHnBi+IuyQu6gDwdWYa3aE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -323,7 +375,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			14Tt6kEEa2eMR14Z6QkQC+RKYhNPJEz1Yek/CXnLycY=
+			a4OL46Wtul74FpN2twz3gsgDGxYOAvvPQhj4vPapvMI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -344,7 +396,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1ye5sGTAvfgr+ltA5UUqVWp63SxuLOicWWEOmnQr1l4=
+			qQJb9mr3esh7D5pD1KXN1diuNjg1Oic2wzuqUGOsKDA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/loginafterlogoutimage.png</key>
@@ -541,6 +593,97 @@
 			<key>hash2</key>
 			<data>
 			ZepykIMSjfzhwAcmupMrkaqvXkhza1ZE3TdHjl8odaw=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			y9SYlSktXYGVluRNV+RJiiiePvetauhqsDOrDn3YZyM=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/OZ2ydKYusz6PtQ4ABF5UxBUC7f+IcTvRQhebcXlrLs=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			uP+M633DvV7yfSp2E1jK09ioMjvCeh4ez79KXSeVTMM=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sFIuzjZG8YNBvn3SV13aLI6B61u89riWTLQ3vEXHm8Y=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xFYyxdzqSVaNE410SnSWmaSvSIgOfCJqwrDytXn8J0M=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EqqqVQvA/yJhlA12aRuDBS4g0dwuYCXV/6b3JJ+dZ0k=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/photo_manager</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9ihMi8iA9GvlKM0qGEQ5TxMH+B2IjEF/OwdW1pPv/eE=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YHMOxD4+CkGvSRt3FWuf0dJ8U2R0TivaPNn8GWMNTfQ=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PBMz4T+tMupuz+mg6z2/5QtBobn/0j6lh01sGy8094o=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			kJUDHHRSjglU4k/lebtfesjWwoxBfwaifX1Qe3NIcSA=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			La8p2mp5akkawYsP+9wVgIXW6+h3/ASZgIWRUlQpSfU=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
 	</dict>

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/AfterLogin/presentation/home_page.dart';
+import 'package:jimoney_frontend/AfterLogin/presentation/settings_page.dart';
 import 'package:jimoney_frontend/Login/presentation/login_afterlogoutpage.dart';
 import 'package:jimoney_frontend/Login/widget/pop_up_drawer.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
@@ -16,5 +17,6 @@ final authroutes =
     GoRoute(
       path: HomePage.path,
       builder: (cxt, __) => const HomePage()), // PopUpDrawer
-    GoRoute(path: AnalyticsPage.path, builder: (cxt, __) => const AnalyticsPage())
+    GoRoute(path: AnalyticsPage.path, builder: (cxt, __) => const AnalyticsPage()),
+    GoRoute(path: SettingsPage.path, builder:(cxt, __) => const SettingsPage(),)
 ]);

@@ -78,11 +78,11 @@ class _HomePageState extends State<HomePage> {
               width: 120,
             ),
             SizedBox(
-              child: IconButton(onPressed: () async{context.push("/analytics");}, icon: Icon(Icons.analytics)),
+              child: IconButton(onPressed: () async{context.go("/analytics");}, icon: Icon(Icons.analytics)),
               width: 120,
             ),
             SizedBox(
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                child: IconButton(onPressed: () async{context.go("/settings");}, icon: Icon(Icons.settings)),
                 width: 120),
           ],
         )),

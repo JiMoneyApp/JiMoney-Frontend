@@ -54,7 +54,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               width: 120,
             ),
             SizedBox(
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                child: IconButton(onPressed: () async{context.go("/settings");}, icon: Icon(Icons.settings)),
                 width: 120),
           ],
         )),
