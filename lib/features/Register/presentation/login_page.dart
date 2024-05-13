@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimoney_frontend/common_widgets/bloc/bottom_navigation_bloc.dart';
 import 'package:jimoney_frontend/features/Register/presentation/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,7 +50,9 @@ class _LoginPageState extends State<LoginPage> {
               )),
           ElevatedButton(
             onPressed: () {
-              context.push("/home");
+              BlocProvider.of<BottomNavigationBloc>(context)
+                  .add(NavigateToHomeEvent());
+              GoRouter.of(context).push("/home");
             },
             child: Text(
               "Login",
