@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jimoney_frontend/common_widgets/bottomNavigationBar.dart';
+import 'package:jimoney_frontend/common_widgets/BottomNavigation/bottomNavigationBar.dart';
 import 'package:jimoney_frontend/features/AfterLogin/widgets/buy_income_show.dart';
 import 'package:jimoney_frontend/features/AfterLogin/widgets/buy_income_switch.dart';
 import 'package:jimoney_frontend/features/AfterLogin/widgets/date_button.dart';

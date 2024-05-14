@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jimoney_frontend/common_widgets/bloc/bottom_navigation_bloc.dart';
+import 'package:jimoney_frontend/common_widgets/BottomNavigation/bloc/bottom_navigation_bloc.dart';
 
 class BottomNavigation extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jimoney_frontend/common_widgets/BottomNavigationBar.dart';
+import 'package:jimoney_frontend/common_widgets/BottomNavigation/bottomNavigationBar.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({Key? key}) : super(key: key);
