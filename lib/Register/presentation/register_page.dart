@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:mysql_client/mysql_client.dart';
+import 'dart:convert';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -12,6 +15,69 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nicknameController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
+  @override
+  Future<void> _register() async {
+    
+    final String baseUrl = 'http://54.179.125.22:5000/user/insert_acc_password';
+    final String username = _usernameController.text;
+    final String password = _passwordController.text;
+    final String nickname = _nicknameController.text;
+    final String confirmPassword = _confirmPasswordController.text;
+    final String apiUrl = '$baseUrl?user_acc=$username&user_name=$nickname&user_password=$password';
+
+    if(password != confirmPassword){
+      print('Password and ConfirmPassword is not the same');
+      return;
+    }
+
+    print(_usernameController.text);
+    print(_passwordController.text);
+    print(_nicknameController.text);
+    print(_confirmPasswordController.text);
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'UName': _usernameController.text,
+        'UPassword': _passwordController.text,
+        'UNickname': _nicknameController.text,
+        'UConfirmPassword': _confirmPasswordController.text,
+      }),
+    );
+
+
+    
+    print(response);
+    if (response.statusCode == 200) {
+      print("123456");
+      if (response.body == 'success!') {  
+        print('Register success');
+        context.push("/login");
+      }
+        // 在这里可以处理登录成功后的逻辑，例如导航到另一个页面
+      else {
+        print('Register failed: ${response.body}');
+        // 显示错误信息
+      }
+    } 
+    else {
+      print('Server error: ${response.statusCode}');
+      // 处理服务器错误
+    }
+    print(response.statusCode);
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Material(
               borderRadius: BorderRadius.circular(10),
               child: TextField(
+                controller: _usernameController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -53,6 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Material(
               borderRadius: BorderRadius.circular(10),
               child: TextField(
+                controller: _nicknameController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -80,6 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Material(
               borderRadius: BorderRadius.circular(10),
               child: TextField(
+                controller: _passwordController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -95,6 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Material(
               borderRadius: BorderRadius.circular(10),
               child: TextField(
+                controller: _confirmPasswordController,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -106,7 +176,9 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(
             padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _register();
+              },
               child: Text(
                 "Register",
                 style: TextStyle(color: Colors.black, fontSize: 16),
