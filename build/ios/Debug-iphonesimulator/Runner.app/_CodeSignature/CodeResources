@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		1hELRUzjLdAa2uU7DxuTpvdyekU=
+		INAkZu4BbwNneWboCQ/5h6Kydoc=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		lwJjUEasShP6yCAcbi1Gm1CrnpM=
+		ZlufMUJ/yOlRTYt5/67x1+9aLTY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		Pl7MAx6kFuCIrlSoNBHDR+ac5dY=
+		ezhpEmcCWKU9tMjMoKI2u1KePrk=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		yzGJ5XlPN5gDn75bX3NNyJfxHO4=
+		CUaQSRHzjj7N9o9ANwRp9GPzdRk=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		FeEPMi3rxp31Yw1meF95WmaM0ZE=
+		yMs6LZjYcTZ6Fvq2VwFsNFLE3jY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/loginafterlogoutimage.png</key>
 		<data>
@@ -196,9 +196,61 @@
 		<data>
 		Ubat0LvE4LUgCwHeyl0Anx2vnzk=
 		</data>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<data>
+		031gvt4ETMp5IFsfLk5lA1IJFiI=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		N7/q8ANIDFOelbutNJzsGcqLLrQ=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<data>
+		hrzMx78UCQZPv2pef2vwssawtDU=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<data>
+		OSKClU8PqFPgayQIV4Hrk/wHB60=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
+		<key>Frameworks/photo_manager.framework/Info.plist</key>
+		<data>
+		RmFuSA5XdkJ90gJtNCkcbc6Pcu8=
+		</data>
+		<key>Frameworks/photo_manager.framework/_CodeSignature/CodeResources</key>
+		<data>
+		TYdAT0cqpIn0XdbbvhHu3WBmhGc=
+		</data>
+		<key>Frameworks/photo_manager.framework/photo_manager</key>
+		<data>
+		8ZEupRxmE5903WIn5DTctSAr8Ak=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<data>
+		n5wAeeHnremMUydOnpHg+9iZMBk=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		GproBFNX+kxHWtbpqkvyrOqDaOk=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<data>
+		xZuMTeWFjy7+BOpz59YVrd4qnR4=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/Info.plist</key>
+		<data>
+		3bk6ROxQc2Yoq55ZwGQzdHrDjlw=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		SjbDJbXzQcwRTEfsGqlDYc2BPAM=
+		SmihBYVV8wyVr3gZ4dKm1IAgako=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -232,7 +284,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EUomjDyZGNKmKegbYrJfR9TPT/APnHd7VSsQbzf1dm8=
+			SFBn6ZztaZA44eWVpUE7d4cBqN94RF8ZkP9KVep875I=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -281,7 +333,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FoZf0qDQM5hk5UyGgF7Con8CUh2WbCn2MXtstRzIZI4=
+			Yei9eyeQicVHj9YMjonpgr4VlME9IzdepehYc4ErYqY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -295,7 +347,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4F8COqqt20YPlZwUx3TJ0dItIVl/XoRJeKBWAFPhgus=
+			0LxJM+1EyyS8ndUEAzysCL1z1b/QH/uJWTj7JsSuaRE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -323,7 +375,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WV6ncQoKVhh4vMF+NFfSZpuwRp6vVrxTX4IvDViJDgk=
+			MIvgA6SK2n26cX/8sI9fBSTrwjkmdRHNPSyqZmi31lA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -344,7 +396,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QrDysfHBmJ/grNQB5cJ0UOn8PeXDks12KR/bi/kQ6G0=
+			MMFepTEg8vbmQ6mNykMxQDt7yrJntqRTubabRV5MnXk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/loginafterlogoutimage.png</key>
@@ -541,6 +593,97 @@
 			<key>hash2</key>
 			<data>
 			ZepykIMSjfzhwAcmupMrkaqvXkhza1ZE3TdHjl8odaw=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qLiRrEfOCq48SEFGhFmaYKudJVM4B1kuuxWBA07ByZw=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3uOAQYjuSLPS2qw/l1wFrEPnVOJM0Gcb3FC0/rDZnvM=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			56cws+DPKLdr53FptLhcd51BiUq+UxfRFJt01ypfKeI=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Tk3Ycf75Gu2iYZIjL3nioIWL41KgIGfZb2IiBIQXfNA=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DrBekFSzb/8fKnoZLW6X62586+kVNM7j5drC+bWgUtQ=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GGRkSf2iyegJr9Oku4VAD7syDyJxS5TgF6KLGxMW7Ag=
+			</data>
+		</dict>
+		<key>Frameworks/photo_manager.framework/photo_manager</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lgxmA6tZL9OZ6YaMdkCQGSnhHcsjZhR/zHB90jrCK0w=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FFZyEFWI9Y/tYQ7kucQIgix2YA3tN/izgGJyXno4fiQ=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vB5GcmtIZH4VjBBlgV3iqqjiuNIurzW65mcHDMQTT9M=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9F9DcUN7qLto9KxYLddt1RxvoLZtiJvqVTwMQatiza0=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			06AqEn1Yy5Yn7+DLfjwX26QU3hQCBc0jRQBOSD9P/wM=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
 	</dict>
