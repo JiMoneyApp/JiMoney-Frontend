@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  Future<int> _login() async {
+  Future<void> _login() async {
     final String baseUrl = 'http://54.179.125.22:5000/user/get_user_id';
     final String username = _usernameController.text;
     final String password = _passwordController.text;
@@ -43,9 +43,11 @@ class _LoginPageState extends State<LoginPage> {
     print(response.body);
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      print('response data = $responseData');
       // 假设API返回的数据包含一个字段 `success` 来表示登录成功
-      if (responseData) {
-        print('Login successful');
+      if (responseData != null) {
+        print('Login success');
+        context.push("/home");
         // 在这里可以处理登录成功后的逻辑，例如导航到另一个页面
       } else {
         print('Login failed: ${responseData['message']}');
@@ -55,7 +57,8 @@ class _LoginPageState extends State<LoginPage> {
       print('Server error: ${response.statusCode}');
       // 处理服务器错误
     }
-    return response.statusCode;
+    print(response.statusCode);
+
   }
 
   
@@ -93,9 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               )),
           ElevatedButton(
             onPressed: () {
-              final tmp = _login();
-              if(tmp == 200)
-                context.push("/home");
+              _login();
             },
             child: Text(
               "Login",
