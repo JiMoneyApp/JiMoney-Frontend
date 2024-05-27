@@ -45,6 +45,9 @@ dependencies:
   build_runner: ^2.4.9
   json_annotation: ^4.9.0
   mysql_client: ^0.0.27
+  bloc: ^8.1.4
+  meta: ^1.11.0
+  flutter_bloc: ^8.1.5
 
 dev_dependencies:
   flutter_test:

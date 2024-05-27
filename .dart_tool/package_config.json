@@ -26,6 +26,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "bloc",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/bloc-8.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -198,6 +204,12 @@
       "rootUri": "file:///Users/wangyichao/development/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "flutter_bloc",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",
@@ -656,7 +668,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-05-27T07:37:46.822734Z",
+  "generated": "2024-05-27T09:11:43.858797Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }
