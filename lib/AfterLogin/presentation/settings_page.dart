@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/head_sticker.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -36,10 +37,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 150,
                   padding: EdgeInsets.only(left: 35),
                   alignment: Alignment.center,
+                  child: HeadSticker(),
                 ),
                 Container(
                     width: 230,
-                    padding: EdgeInsets.only(),
+                    padding: EdgeInsets.only(left: 50),
                     alignment: Alignment.centerLeft,
                     child: Column(
                       children: [
@@ -66,11 +68,26 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             Container(
-              height: 450,
+              height: 320,
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text("About Us", style: TextStyle(fontSize: 20, color: Colors.black)),
+                style: ElevatedButton.styleFrom( 
+                  minimumSize: Size(320, 50),
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                  shadowColor: Colors.black,
+                ),  
+              ),
+            ),
+            Container(
+              height: 90,
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Log Out", style: TextStyle(fontSize: 20, color: Colors.black)),
                 style: ElevatedButton.styleFrom( 
                   minimumSize: Size(320, 50),
                   backgroundColor: Colors.white,

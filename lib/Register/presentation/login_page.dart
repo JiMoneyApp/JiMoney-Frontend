@@ -3,18 +3,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:convert';
+import 'package:mysql_client/mysql_client.dart';
+import 'package:http/http.dart' as http;
 import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   static String path = "/login";
+  
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  Future<int> _login() async {
+    final String baseUrl = 'http://54.179.125.22:5000/user/get_user_id';
+    final String username = _usernameController.text;
+    final String password = _passwordController.text;
+    final String apiUrl = '$baseUrl?user_acc=$username&user_password=$password';
+    print(_usernameController.text);
+    print(_passwordController.text);
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'UName': _usernameController.text,
+        'UPassword': _passwordController.text,
+      }),
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      // 假设API返回的数据包含一个字段 `success` 来表示登录成功
+      if (responseData) {
+        print('Login successful');
+        // 在这里可以处理登录成功后的逻辑，例如导航到另一个页面
+      } else {
+        print('Login failed: ${responseData['message']}');
+        // 显示错误信息
+      }
+    } else {
+      print('Server error: ${response.statusCode}');
+      // 处理服务器错误
+    }
+    return response.statusCode;
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +77,8 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: Color(0xFF559BCF),
             ),
           ),
-          _usernameField(),
-          _passwordField(),
+          _usernameField(_usernameController),
+          _passwordField(_passwordController),
           Container(
               height: 80,
               width: 350,
@@ -48,7 +93,9 @@ class _LoginPageState extends State<LoginPage> {
               )),
           ElevatedButton(
             onPressed: () {
-              context.push("/home");
+              final tmp = _login();
+              if(tmp == 200)
+                context.push("/home");
             },
             child: Text(
               "Login",
@@ -102,7 +149,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Widget _usernameField() {
+
+
+Widget _usernameField(final TextEditingController _usernameController) {
   return Container(
     height: 100,
     width: 350,
@@ -110,6 +159,7 @@ Widget _usernameField() {
     child: Material(
       borderRadius: BorderRadius.circular(10),
       child: TextField(
+        controller: _usernameController,
         autofillHints: const [AutofillHints.password],
         keyboardType: TextInputType.text,
         cursorColor: Colors.blue,
@@ -133,7 +183,7 @@ Widget _usernameField() {
   );
 }
 
-Widget _passwordField() {
+Widget _passwordField(final TextEditingController _passwordController) {
   return Container(
     height: 100,
     width: 350,
@@ -141,6 +191,7 @@ Widget _passwordField() {
     child: Material(
       borderRadius: BorderRadius.circular(10),
       child: TextField(
+        controller: _passwordController,
         autofillHints: const [AutofillHints.password],
         keyboardType: TextInputType.text,
         cursorColor: Colors.blue,

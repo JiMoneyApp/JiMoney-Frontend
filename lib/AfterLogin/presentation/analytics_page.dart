@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/AfterLogin/presentation/home_page.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/buy_income_switch.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/circle_chart.dart';
-import 'package:jimoney_frontend/AfterLogin/widgets/circle_line_bar_switch.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/day_month_year_switch.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/pie_chart.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -25,15 +25,14 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
         body: Column(
           children: [  
             Container(
-              padding: EdgeInsets.only(top: 75),
-              child: CircleLineBarSwitch(),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 15),
+              padding: EdgeInsets.only(top: 80, bottom: 10),
               child: DayMonthYearSwitch(),
             ),
-            CircleChart(
-
+            
+            Container(
+              height: 300,
+              padding: EdgeInsets.only(bottom: 10),
+              child: PieChart(),
             ),
             Container(
               child: BuyIncomeSwitch(),
