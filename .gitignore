@@ -49,6 +49,10 @@ analysis_benchmark.json
 # packages file containing multi-root paths
 .packages.generated
 
+# huge files flutter generated
+*.dill
+*.bin
+
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
