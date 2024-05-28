@@ -52,16 +52,16 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 20),
                 _passwordField(_passwordController, context),
                 Container(
-                  height: 80,
+                  height: 50,
                   width: 350,
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                  padding: EdgeInsets.only(bottom: 30),
                   child: Text(
                     "Forget password?",
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       fontSize: 13,
-                      color: Colors.red.shade100,
+                      color: const Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
                 ),
@@ -185,52 +185,50 @@ Widget _passwordField(
           height: 100,
           width: 350,
           alignment: Alignment.bottomCenter,
-          child: Column(
-              // borderRadius: BorderRadius.circular(10),
-              children: [
-                TextField(
-                  controller: _passwordController,
-                  autofillHints: const [AutofillHints.password],
-                  keyboardType: TextInputType.text,
-                  cursorColor: Colors.blue,
-                  onChanged: (value) {
-                    BlocProvider.of<LoginBloc>(context)
-                        .add(PasswordChanged(password: value));
-                  },
-                  onEditingComplete: () {
-                    debugPrint("Password edit completed!");
-                    TextInput.finishAutofillContext();
-                  },
-                  obscureText: !state,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 4.0)),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: "Password",
-                      hintStyle: TextStyle(fontSize: 14),
-                      suffixIcon: Padding(
-                        padding: EdgeInsets.only(right: 6),
-                        child: IconButton(
-                          iconSize: 18,
-                          onPressed: () {
-                            context.read<BooleanCubit>().set(!state);
-                          },
-                          icon: Icon(
-                              state ? Icons.visibility : Icons.visibility_off,
-                              color: const Color(0xffff8b49)),
-                        ),
-                      )),
-                ),
-              ]),
+          child: Column(children: [
+            TextField(
+              controller: _passwordController,
+              autofillHints: const [AutofillHints.password],
+              keyboardType: TextInputType.text,
+              cursorColor: Colors.blue,
+              onChanged: (value) {
+                BlocProvider.of<LoginBloc>(context)
+                    .add(PasswordChanged(password: value));
+              },
+              onEditingComplete: () {
+                debugPrint("Password edit completed!");
+                TextInput.finishAutofillContext();
+              },
+              obscureText: !state,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  fillColor: Colors.white,
+                  filled: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.blue, width: 4.0)),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  hintText: "Password",
+                  hintStyle: TextStyle(fontSize: 14),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.only(right: 6),
+                    child: IconButton(
+                      iconSize: 18,
+                      onPressed: () {
+                        context.read<BooleanCubit>().set(!state);
+                      },
+                      icon: Icon(
+                        state ? Icons.visibility : Icons.visibility_off,
+                        color: const Color(0xFF559BCF),
+                      ),
+                    ),
+                  )),
+            ),
+          ]),
         );
       },
     ),
