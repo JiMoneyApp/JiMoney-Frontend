@@ -22,6 +22,26 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('錯誤'),
+          content: Text('帳號或密碼錯誤'),
+          actions: [
+            TextButton(
+              child: Text('確定'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Future<void> _login() async {
     final String baseUrl = 'http://54.179.125.22:5000/user/get_user_id';
@@ -44,16 +64,16 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
       print('response data = $responseData');
-      // 假设API返回的数据包含一个字段 `success` 来表示登录成功
       if (responseData != null) {
         print('Login success');
         context.push("/home");
-        // 在这里可以处理登录成功后的逻辑，例如导航到另一个页面
-      } else {
-        print('Login failed: ${responseData['message']}');
-        // 显示错误信息
+      } 
+      else {
+        print('Login failed');
+        _showErrorDialog(context);
       }
-    } else {
+    } 
+    else {
       print('Server error: ${response.statusCode}');
       // 处理服务器错误
     }

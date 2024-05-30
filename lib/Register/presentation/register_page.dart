@@ -31,9 +31,29 @@ class _RegisterPageState extends State<RegisterPage> {
     final String confirmPassword = _confirmPasswordController.text;
     final String apiUrl = '$baseUrl?user_acc=$username&user_name=$nickname&user_password=$password';
 
+    void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('錯誤'),
+          content: Text('密碼和確認密碼不一致'),
+          actions: [
+            TextButton(
+              child: Text('確定'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
     if(password != confirmPassword){
       print('Password and ConfirmPassword is not the same');
-      return;
+      return _showErrorDialog(context);
     }
 
     print(_usernameController.text);
