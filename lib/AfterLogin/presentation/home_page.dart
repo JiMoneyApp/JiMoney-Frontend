@@ -8,6 +8,7 @@ import 'package:jimoney_frontend/AfterLogin/widgets/date_button.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/encouragement.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/list_output.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/monthly_total_balance.dart';
+import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

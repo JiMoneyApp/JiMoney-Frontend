@@ -8,6 +8,8 @@ import 'package:mysql_client/mysql_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:jimoney_frontend/Register/presentation/register_page.dart';
 
+int uid = 0;
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -63,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
     print(response.body);
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      uid = responseData[0];
       print('response data = $responseData');
       if (responseData != null) {
         print('Login success');
