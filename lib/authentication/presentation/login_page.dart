@@ -5,23 +5,17 @@ import 'package:jimoney_frontend/authentication/Login/bloc/login_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/feature/common/application/boolean_cubit.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   static String path = "/login";
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginBloc(),
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _usernameController = TextEditingController();
+    return BlocProvider<LoginBloc>(
+      create: (_) => LoginBloc(),
       child: Scaffold(
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
@@ -48,9 +42,17 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Color(0xFF559BCF),
                   ),
                 ),
-                _usernameField(_usernameController, context),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return _usernameField(context, _usernameController);
+                  },
+                ),
                 SizedBox(height: 20),
-                _passwordField(_passwordController, context),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return _passwordField(context, _passwordController);
+                  },
+                ),
                 Container(
                   height: 50,
                   width: 350,
@@ -134,103 +136,107 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
 
-Widget _usernameField(
-    final TextEditingController _usernameController, BuildContext context) {
-  return Container(
-    height: 100,
-    width: 350,
-    alignment: Alignment.bottomCenter,
-    child: TextField(
-      controller: _usernameController,
-      autofillHints: const [AutofillHints.username],
-      keyboardType: TextInputType.text,
-      cursorColor: Colors.blue,
-      onChanged: (value) {
-        BlocProvider.of<LoginBloc>(context)
-            .add(AccountChanged(username: value));
-      },
-      onEditingComplete: () {
-        debugPrint("Username edit completed!");
-        TextInput.finishAutofillContext();
-      },
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
+  Widget _usernameField(
+      BuildContext context, TextEditingController usernameController) {
+    // final TextEditingController _usernameController = TextEditingController();
+
+    return Container(
+      height: 100,
+      width: 350,
+      alignment: Alignment.bottomCenter,
+      child: TextField(
+        controller: usernameController,
+        autofillHints: const [AutofillHints.username],
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.blue,
+        onChanged: (value) {
+          BlocProvider.of<LoginBloc>(context)
+              .add(AccountChanged(username: value));
+        },
+        onEditingComplete: () {
+          debugPrint("Username edit completed!");
+          TextInput.finishAutofillContext();
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none),
+          fillColor: Colors.white,
+          filled: true,
+          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none),
-        fillColor: Colors.white,
-        filled: true,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.blue, width: 4.0),
+            borderSide: BorderSide(color: Colors.blue, width: 4.0),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          // floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: "Username",
+          hintStyle: TextStyle(fontSize: 14),
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-        // floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: "Username",
-        hintStyle: TextStyle(fontSize: 14),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _passwordField(
-    final TextEditingController _passwordController, BuildContext context) {
-  return BlocProvider<BooleanCubit>(
-    lazy: false,
-    create: (_) => BooleanCubit(false),
-    child: BlocBuilder<BooleanCubit, bool>(
-      builder: (context, state) {
-        return Container(
-          height: 100,
-          width: 350,
-          alignment: Alignment.bottomCenter,
-          child: Column(children: [
-            TextField(
-              controller: _passwordController,
-              autofillHints: const [AutofillHints.password],
-              keyboardType: TextInputType.text,
-              cursorColor: Colors.blue,
-              onChanged: (value) {
-                BlocProvider.of<LoginBloc>(context)
-                    .add(PasswordChanged(password: value));
-              },
-              onEditingComplete: () {
-                debugPrint("Password edit completed!");
-                TextInput.finishAutofillContext();
-              },
-              obscureText: !state,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  fillColor: Colors.white,
-                  filled: true,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.blue, width: 4.0)),
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  hintText: "Password",
-                  hintStyle: TextStyle(fontSize: 14),
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(right: 6),
-                    child: IconButton(
-                      iconSize: 18,
-                      onPressed: () {
-                        context.read<BooleanCubit>().set(!state);
-                      },
-                      icon: Icon(
-                        state ? Icons.visibility : Icons.visibility_off,
-                        color: const Color(0xFF559BCF),
+  Widget _passwordField(
+      BuildContext context, TextEditingController passwordController) {
+    // final TextEditingController _passwordController = TextEditingController();
+
+    return BlocProvider<BooleanCubit>(
+      lazy: false,
+      create: (_) => BooleanCubit(false),
+      child: BlocBuilder<BooleanCubit, bool>(
+        builder: (context, state) {
+          return Container(
+            height: 100,
+            width: 350,
+            alignment: Alignment.bottomCenter,
+            child: Column(children: [
+              TextField(
+                controller: passwordController,
+                autofillHints: const [AutofillHints.password],
+                keyboardType: TextInputType.text,
+                cursorColor: Colors.blue,
+                onChanged: (value) {
+                  BlocProvider.of<LoginBloc>(context)
+                      .add(PasswordChanged(password: value));
+                },
+                onEditingComplete: () {
+                  debugPrint("Password edit completed!");
+                  TextInput.finishAutofillContext();
+                },
+                obscureText: !state,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none),
+                    fillColor: Colors.white,
+                    filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.blue, width: 4.0)),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText: "Password",
+                    hintStyle: TextStyle(fontSize: 14),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(right: 6),
+                      child: IconButton(
+                        iconSize: 18,
+                        onPressed: () {
+                          context.read<BooleanCubit>().set(!state);
+                        },
+                        icon: Icon(
+                          state ? Icons.visibility : Icons.visibility_off,
+                          color: const Color(0xFF559BCF),
+                        ),
                       ),
-                    ),
-                  )),
-            ),
-          ]),
-        );
-      },
-    ),
-  );
+                    )),
+              ),
+            ]),
+          );
+        },
+      ),
+    );
+  }
 }
