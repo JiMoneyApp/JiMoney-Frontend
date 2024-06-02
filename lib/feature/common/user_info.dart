@@ -2,7 +2,7 @@ class UserInfo {
   String username;
   String nickname;
   String password;
-  bool rightHanded;
+  bool rightHanded = true;
 
   UserInfo({
     required this.username,
