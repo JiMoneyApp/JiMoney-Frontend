@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -46,7 +47,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       );
 
       if (isRegistered) {
-        emit(RegisterSuccess("Registration successful!"));
+        UserInfo userInfo = UserInfo(
+          username: event.username,
+          nickname: event.nickname,
+          password: event.password,
+          rightHanded: true, // 这里假设为右撇子，您可以根据实际情况修改
+        );
+        emit(RegisterSuccess("Registration successful!", userInfo));
       } else {
         emit(RegisterFailure("Registration failed"));
         emit(RegisterFormState(
