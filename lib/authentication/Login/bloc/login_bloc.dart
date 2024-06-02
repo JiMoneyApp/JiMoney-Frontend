@@ -27,9 +27,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginSuccess());
       } else {
         emit(LoginFailure('Invalid username or password'));
+        emit(LoginFormState(
+            isAccountValid: _isValidAccount(event.username),
+            isPasswordValid: _isValidPassword(event.password)));
       }
     } catch (e) {
       emit(LoginFailure('An error occurred'));
+      emit(LoginFormState(
+          isAccountValid: _isValidAccount(event.username),
+          isPasswordValid: _isValidPassword(event.password)));
     }
   }
 
