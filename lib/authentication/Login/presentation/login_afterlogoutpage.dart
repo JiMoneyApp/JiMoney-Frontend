@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jimoney_frontend/feature/authentication/Login/widget/pop_up_drawer.dart';
+import 'package:jimoney_frontend/authentication/Login/widget/pop_up_drawer.dart';
 
 class LoginAfterLogoutPage extends StatefulWidget {
   const LoginAfterLogoutPage({super.key});

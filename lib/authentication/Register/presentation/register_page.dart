@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:mysql_client/mysql_client.dart';
 import 'dart:convert';
-import 'package:jimoney_frontend/feature/authentication/presentation/login_page.dart';
+import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

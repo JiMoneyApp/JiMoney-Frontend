@@ -2,10 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.dart';
-import 'package:jimoney_frontend/feature/authentication/Login/presentation/login_afterlogoutpage.dart';
-import 'package:jimoney_frontend/feature/authentication/Login/widget/pop_up_drawer.dart';
-import 'package:jimoney_frontend/feature/authentication/presentation/login_page.dart';
-import 'package:jimoney_frontend/feature/authentication/Register/presentation/register_page.dart';
+import 'package:jimoney_frontend/authentication/Login/presentation/login_afterlogoutpage.dart';
+import 'package:jimoney_frontend/authentication/Login/widget/pop_up_drawer.dart';
+import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
+import 'package:jimoney_frontend/authentication/Register/presentation/register_page.dart';
 
 final authroutes =
     GoRouter(initialLocation: LoginAfterLogoutPage.path, routes: [
