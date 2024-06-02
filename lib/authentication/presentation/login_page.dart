@@ -44,13 +44,13 @@ class LoginPage extends StatelessWidget {
                 ),
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
-                    return _usernameField(context, _usernameController);
-                  },
-                ),
-                SizedBox(height: 20),
-                BlocBuilder<LoginBloc, LoginState>(
-                  builder: (context, state) {
-                    return _passwordField(context, _passwordController);
+                    return Column(
+                      children: [
+                        _usernameField(_usernameController, context),
+                        SizedBox(height: 20),
+                        _passwordField(_passwordController, context)
+                      ],
+                    );
                   },
                 ),
                 Container(
@@ -138,9 +138,9 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _usernameField(
-      BuildContext context, TextEditingController usernameController) {
-    // final TextEditingController _usernameController = TextEditingController();
-
+    final TextEditingController usernameController,
+    BuildContext context,
+  ) {
     return Container(
       height: 100,
       width: 350,
@@ -178,9 +178,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _passwordField(
-      BuildContext context, TextEditingController passwordController) {
-    // final TextEditingController _passwordController = TextEditingController();
-
+      final TextEditingController _passwordController, BuildContext context) {
     return BlocProvider<BooleanCubit>(
       lazy: false,
       create: (_) => BooleanCubit(false),
@@ -192,13 +190,13 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Column(children: [
               TextField(
-                controller: passwordController,
+                controller: _passwordController,
                 autofillHints: const [AutofillHints.password],
                 keyboardType: TextInputType.text,
                 cursorColor: Colors.blue,
                 onChanged: (value) {
                   BlocProvider.of<LoginBloc>(context)
-                      .add(PasswordChanged(password: value));
+                      .add(LPasswordChanged(password: value));
                 },
                 onEditingComplete: () {
                   debugPrint("Password edit completed!");

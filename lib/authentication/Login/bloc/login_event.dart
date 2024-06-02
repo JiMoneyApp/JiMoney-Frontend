@@ -16,8 +16,8 @@ class AccountChanged extends LoginEvent {
   AccountChanged({required this.username});
 }
 
-class PasswordChanged extends LoginEvent {
+class LPasswordChanged extends LoginEvent {
   final String password;
 
-  PasswordChanged({required this.password});
+  LPasswordChanged({required this.password});
 }

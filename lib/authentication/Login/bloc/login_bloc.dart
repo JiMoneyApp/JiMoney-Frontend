@@ -11,7 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       : super(LoginFormState(isAccountValid: true, isPasswordValid: true)) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
     on<AccountChanged>(_onAccountChanged);
-    on<PasswordChanged>(_onPasswordChanged);
+    on<LPasswordChanged>(_onPasswordChanged);
   }
 
   Future<void> _onLoginButtonPressed(
@@ -49,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  void _onPasswordChanged(PasswordChanged event, Emitter<LoginState> emit) {
+  void _onPasswordChanged(LPasswordChanged event, Emitter<LoginState> emit) {
     final currentState = state;
     if (currentState is LoginFormState) {
       emit(LoginFormState(
