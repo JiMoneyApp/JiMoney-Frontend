@@ -48,9 +48,17 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Color(0xFF559BCF),
                   ),
                 ),
-                _usernameField(_usernameController, context),
-                SizedBox(height: 20),
-                _passwordField(_passwordController, context),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        _usernameField(_usernameController, context),
+                        SizedBox(height: 20),
+                        _passwordField(_passwordController, context)
+                      ],
+                    );
+                  },
+                ),
                 Container(
                   height: 50,
                   width: 350,
@@ -193,7 +201,7 @@ Widget _passwordField(
               cursorColor: Colors.blue,
               onChanged: (value) {
                 BlocProvider.of<LoginBloc>(context)
-                    .add(PasswordChanged(password: value));
+                    .add(LPasswordChanged(password: value));
               },
               onEditingComplete: () {
                 debugPrint("Password edit completed!");
