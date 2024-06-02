@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
       final responseData = jsonDecode(response.body);
       uid = responseData[0];
       print('response data = $responseData');
-      if (responseData != null) {
+      if (responseData[0] != null) {
         print('Login success');
         context.push("/home");
       } 

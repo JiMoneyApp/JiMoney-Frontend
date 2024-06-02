@@ -9,6 +9,7 @@ import 'package:jimoney_frontend/AfterLogin/widgets/encouragement.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/list_output.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/monthly_total_balance.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/floating_action_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -75,28 +76,43 @@ class _HomePageState extends State<HomePage> {
                 height: 349,
                 padding: EdgeInsets.only(top: 15),
                 child: ListOutput(),
-              )
+              ),
             ],
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-            child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.home, color: Color(0XFFF84490))),
-              width: 120,
-            ),
-            SizedBox(
-              child: IconButton(onPressed: () async{context.go("/analytics");}, icon: Icon(Icons.analytics, color: Color(0XFFF84490),)),
-              width: 120,
-            ),
-            SizedBox(
-                child: IconButton(onPressed: () async{context.go("/settings");}, icon: Icon(Icons.settings, color: Color(0XFFF84490))),
-                width: 120),
-          ],
-        )),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.home, color: Color(0XFFF84490))),
+                width: 120,
+              ),
+              SizedBox(
+                child: IconButton(
+                    onPressed: () async {
+                      context.go("/analytics");
+                    },
+                    icon: Icon(
+                      Icons.analytics,
+                      color: Color(0XFFF84490),
+                    )),
+                width: 120,
+              ),
+              SizedBox(
+                  child: IconButton(
+                      onPressed: () async {
+                        context.go("/settings");
+                      },
+                      icon: Icon(Icons.settings, color: Color(0XFFF84490))),
+                  width: 120),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButtonExample(),
       ),
     );
   }

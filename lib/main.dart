@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jimoney_frontend/AfterLogin/presentation/analytics_page.dart';
-import 'package:jimoney_frontend/AfterLogin/presentation/home_page.dart';
-import 'package:jimoney_frontend/Login/presentation/login_afterlogoutpage.dart';
-import 'package:jimoney_frontend/Register/presentation/login_page.dart';
-import 'package:jimoney_frontend/Register/presentation/register_page.dart';
-import 'package:jimoney_frontend/lifecycle/app_lifecycle.dart';
 import 'package:jimoney_frontend/routing/auth_routes.dart';
 
 void main() {

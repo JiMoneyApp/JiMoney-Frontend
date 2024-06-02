@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/head_sticker.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/time_notification.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -146,7 +147,9 @@ class _SettingsPageState extends State<SettingsPage> {
             Container(
               padding: EdgeInsets.only(top: 30),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 child: Text("Daily Reminders",
                     style: TextStyle(fontSize: 20, color: Colors.black)),
                 style: ElevatedButton.styleFrom(
@@ -179,6 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () {
+                  uid = 0;
                   context.go("/login");
                 },
                 child: Text("Log Out",
