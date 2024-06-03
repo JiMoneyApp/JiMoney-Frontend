@@ -1,0 +1,1 @@
+ /Users/kenny/Desktop/app/JiMoney-Frontend/.dart_tool/flutter_build/53df074fe2956d028dc17ab5ac74f2bd/native_assets.yaml: 
