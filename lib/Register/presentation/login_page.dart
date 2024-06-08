@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
       print('response data = $responseData');
       if (responseData[0] != null) {
         print('Login success');
-        context.push("/home");
+        context.push("/budget");
       } 
       else {
         print('Login failed');

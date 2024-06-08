@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jimoney_frontend/DataBase/ledger.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/switch_ledger.dart';
 
 class ListOutput extends StatefulWidget {
   const ListOutput({super.key});
@@ -37,14 +38,13 @@ class _ListOutputState extends State<ListOutput> {
       print("Error: $e");
     }
   }
-
+  
   @override
   Future<void> _fetchApiData() async {
     final String baseUrl = 'http://54.179.125.22:5000/data/get_ledger_datas';
     final int userid = uid;
     await _getLedgerName();
     final String ledger_n = ledger_name[0][0];
-    //final String ledger_n = 'jeffery_ledger_2';
     print(ledger_n);
     final String apiUrl = '$baseUrl?user_id=$userid&ledger_name=$ledger_n';
     try {

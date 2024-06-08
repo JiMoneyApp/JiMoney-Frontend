@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:go_router/go_router.dart';
+import 'package:jimoney_frontend/AfterLogin/widgets/change_budget.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/head_sticker.dart';
 import 'package:jimoney_frontend/Register/presentation/login_page.dart';
 import 'package:jimoney_frontend/AfterLogin/widgets/time_notification.dart';
@@ -148,7 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
               padding: EdgeInsets.only(top: 30),
               child: ElevatedButton(
                 onPressed: () {
-                  
+                  TimePickerExample();
                 },
                 child: Text("Daily Reminders",
                     style: TextStyle(fontSize: 20, color: Colors.black)),
@@ -161,8 +162,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            // Change Budget
+            ChangeBudget(),
             Container(
-              height: 320,
+              height: 260,
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () {},
