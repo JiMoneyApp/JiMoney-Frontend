@@ -20,7 +20,6 @@ class _LedgerSelectorState extends State<LedgerSelector> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _fetchUserId();
     _fetchLedger();
   }
 
@@ -30,6 +29,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     try {
       userId =
           await userService.fetchUserId(userInfo.username, userInfo.password);
+      print("userID = " + userId.toString());
       // userId;
       // Now you can use the userId as needed
     } catch (e) {
@@ -43,9 +43,13 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerService>();
     //print("ERRORCHECKK2");
     try {
-      print("ERRORCHECCK1");
+      if (userId == null) {
+        await _fetchUserId();
+      }
+      print("ERRORCHECKK1");
       userInfo.ledger = (await ledgerService.fetchLedgersName(userId!))!;
       print("ERRORCHECKK2");
+      userInfo.selectedledger = userInfo.ledger[0];
       print(userInfo.selectedledger);
       // userId
       // Now you can use the userId as needed
