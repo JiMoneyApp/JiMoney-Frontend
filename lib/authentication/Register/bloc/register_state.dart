@@ -11,6 +11,7 @@ class RegisterSuccess extends RegisterState {
   final String message;
 
   RegisterSuccess(this.message);
+  // RegisterSuccess.successWithUserInfo(this.userInfo) : message = "Registration successful!";
 }
 
 class RegisterFailure extends RegisterState {

@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,6 +9,7 @@ part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
+  final UserInfo userInfo = GetIt.instance<UserInfo>();
   RegisterBloc()
       : super(RegisterFormState(
             isAccountValid: true,
@@ -46,6 +49,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       );
 
       if (isRegistered) {
+        userInfo.username = event.username;
+        userInfo.password = event.password;
+        userInfo.nickname = event.nickname;
+        userInfo.budget = 0;
+        userInfo.isdark = false;
+        userInfo.noticetime = "";
         emit(RegisterSuccess("Registration successful!"));
       } else {
         emit(RegisterFailure("Registration failed"));

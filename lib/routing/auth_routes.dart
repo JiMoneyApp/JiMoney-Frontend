@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:jimoney_frontend/authentication/AfterLogin/budget_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.dart';
@@ -22,5 +23,6 @@ final authroutes =
   GoRoute(
     path: SettingsPage.path,
     builder: (cxt, __) => const SettingsPage(),
-  )
+  ),
+  GoRoute(path: BudgetPage.path, builder: (cxt, __) => const BudgetPage()),
 ]);

@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
+import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:get_it/get_it.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final UserService userService = GetIt.instance<UserService>();
+  final UserInfo userInfo = GetIt.instance<UserInfo>();
+
   LoginBloc()
       : super(LoginFormState(isAccountValid: true, isPasswordValid: true)) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
@@ -21,9 +25,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoading());
 
     try {
-      bool isLoggedIn = await _authenticateUser(event.username, event.password);
-
-      if (isLoggedIn) {
+      final int? userId =
+          await userService.fetchUserId(event.username, event.password);
+      if (userId != null) {
+        final nickname = await userService.fetchUserNickname(userId);
+        final budget = await userService.fetchUserBudget(userId);
+        final noticetime = await userService.fetchUserNoticeTime(userId);
+        // final righthanded =
+        //     await userService.fetchUserRightHandedStatus(userId);
+        userInfo.username = event.username;
+        userInfo.nickname = nickname!;
+        userInfo.password = event.password;
+        userInfo.rightHanded = true;
+        userInfo.budget = budget!;
+        userInfo.noticetime = noticetime!;
+        // Optionally, store the userInfo in GetIt or another service
         emit(LoginSuccess());
       } else {
         emit(LoginFailure('Invalid username or password'));
@@ -56,29 +72,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         isAccountValid: currentState.isAccountValid,
         isPasswordValid: _isValidPassword(event.password),
       ));
-    }
-  }
-
-  Future<bool> _authenticateUser(String username, String password) async {
-    final String baseUrl = 'http://54.179.125.22:5000/user/get_user_id';
-    final String apiUrl = '$baseUrl?user_acc=$username&user_password=$password';
-
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'UName': username,
-        'UPassword': password,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      return responseData != null;
-    } else {
-      return false;
     }
   }
 

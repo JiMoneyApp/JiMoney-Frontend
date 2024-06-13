@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/authentication/Register/bloc/register_bloc.dart';
 import 'package:jimoney_frontend/feature/common/application/boolean_cubit.dart';
@@ -76,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterBloc(),
+      create: (context) => GetIt.instance<RegisterBloc>(),
       child: Scaffold(
         body: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {

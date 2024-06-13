@@ -152,6 +152,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "dbus",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/dbus-0.7.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "dio",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/dio-5.4.3+1",
       "packageUri": "lib/",
@@ -218,6 +224,24 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_local_notifications",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_local_notifications-17.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_local_notifications_linux",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_local_notifications_linux-4.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_local_notifications_platform_interface",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_local_notifications_platform_interface-7.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/wangyichao/development/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -232,6 +256,12 @@
     {
       "name": "frontend_server_client",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/frontend_server_client-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "get_it",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/get_it-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -428,6 +458,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "petitparser",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/petitparser-6.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "photo_manager",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/photo_manager-2.8.2",
       "packageUri": "lib/",
@@ -554,6 +590,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "timezone",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/timezone-0.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "timing",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/timing-1.0.1",
       "packageUri": "lib/",
@@ -656,6 +698,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/xml-6.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
@@ -668,7 +716,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-05-27T13:09:30.760561Z",
+  "generated": "2024-06-12T09:39:33.442960Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }

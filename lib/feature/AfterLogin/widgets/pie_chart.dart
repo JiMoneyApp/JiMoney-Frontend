@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jimoney_frontend/DataBase/costResponse.dart';
+import 'package:jimoney_frontend/DataBase/ledger.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PieChart extends StatefulWidget {
@@ -29,13 +29,15 @@ class _PieChartState extends State<PieChart> {
             series: <CircularSeries>[
               // Render pie chart
               PieSeries<ChartData, String>(
-                  dataSource: chartData,
-                  pointColorMapper: (ChartData data, _) => data.color,
-                  xValueMapper: (ChartData data, _) => data.x,
-                  yValueMapper: (ChartData data, _) => data.y,
-                  dataLabelMapper: (ChartData data, _) => data.x, 
-                  dataLabelSettings: DataLabelSettings(isVisible: true, labelPosition: ChartDataLabelPosition.outside),
-                ),  
+                dataSource: chartData,
+                pointColorMapper: (ChartData data, _) => data.color,
+                xValueMapper: (ChartData data, _) => data.x,
+                yValueMapper: (ChartData data, _) => data.y,
+                dataLabelMapper: (ChartData data, _) => data.x,
+                dataLabelSettings: DataLabelSettings(
+                    isVisible: true,
+                    labelPosition: ChartDataLabelPosition.outside),
+              ),
             ],
           ),
         ),
