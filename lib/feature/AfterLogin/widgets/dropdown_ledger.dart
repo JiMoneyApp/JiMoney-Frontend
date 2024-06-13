@@ -59,10 +59,54 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     }
   }
 
+  void _showAddLedgerDialog(BuildContext context) {
+    final TextEditingController _ledgerController = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Ledger'),
+            content: TextFormField(
+              controller: _ledgerController,
+              decoration: InputDecoration(hintText: 'Enter ledger name'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ledger name cannot be empty';
+                }
+                return null;
+              },
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  if (_ledgerController.text.isNotEmpty) {
+                    setState(() {
+                      
+                    });
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Text('Add'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+            ],
+          );
+        });
+  }
+
   void _onLedgerChanged(String? newLedger) {
-    setState(() {
-      userInfo.selectedledger = newLedger!;
-    });
+    if (newLedger == 'add_new') {
+      _showAddLedgerDialog(context);
+    } else {
+      setState(() {
+        userInfo.selectedledger = newLedger!;
+      });
+    }
 
     // Add your logic here to handle ledger switch
     print("Switched to ledger: $newLedger");
@@ -86,7 +130,13 @@ class _LedgerSelectorState extends State<LedgerSelector> {
           value: ledger,
           child: Text(ledger),
         );
-      }).toList(),
+      }).toList()
+        ..add(
+          DropdownMenuItem<String>(
+            value: 'add_new',
+            child: Text('Add New Ledger'),
+          ),
+        ),
     );
   }
 }

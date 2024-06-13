@@ -70,16 +70,18 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
+                width: double.infinity,
+                child: TotalCost(),
+              ),
+              Container(
                   color: Color(0XFFFFD9D9),
                   width: 200,
                   height: 50,
                   padding: EdgeInsets.only(top: 15),
                   child: LedgerSelector()),
-              // Container(
-              //   height: 349,
-              //   padding: EdgeInsets.only(top: 15),
-              //   child: ListOutput(),
-              // ),
+              Container(
+                
+              )
             ],
           ),
         ),

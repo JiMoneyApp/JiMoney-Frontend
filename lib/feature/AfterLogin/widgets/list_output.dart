@@ -16,28 +16,6 @@
 //   List<dynamic> ledger_name = [];
 
 //   @override
-//   Future<void> _getLedgerName() async {
-//     final String baseUrl = 'http://54.179.125.22:5000/ledger/get_ledgers_name';
-//     // final int userid = uid;
-//     final String ledger_n = '';
-//     final String apiUrl = '$baseUrl?user_id=$userid';
-//     try {
-//       var response = await http.get(Uri.parse(apiUrl));
-//       // print(userid);
-//       print(response.headers);
-//       if (response.statusCode == 200) {
-//         print('Response body: ${response.body}');
-//         ledger_name = jsonDecode(response.body);
-//         print(ledger_name[0][0]);
-//       } else {
-//         print("Failed to load data");
-//       }
-//     } catch (e) {
-//       print("Error: $e");
-//     }
-//   }
-
-//   @override
 //   Future<void> _fetchApiData() async {
 //     final String baseUrl = 'http://54.179.125.22:5000/data/get_ledger_datas';
 //     // final int userid = uid;
