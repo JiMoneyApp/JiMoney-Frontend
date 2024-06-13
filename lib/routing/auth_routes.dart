@@ -7,6 +7,7 @@ import 'package:jimoney_frontend/authentication/Login/presentation/login_afterlo
 import 'package:jimoney_frontend/authentication/Login/widget/pop_up_drawer.dart';
 import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
 import 'package:jimoney_frontend/authentication/Register/presentation/register_page.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/presentation/newbie_budget_page.dart';
 
 final authroutes =
     GoRouter(initialLocation: LoginAfterLogoutPage.path, routes: [
@@ -24,5 +25,5 @@ final authroutes =
     path: SettingsPage.path,
     builder: (cxt, __) => const SettingsPage(),
   ),
-  GoRoute(path: BudgetPage.path, builder: (cxt, __) => const BudgetPage()),
+  GoRoute(path: NewbieBudgetPage.path, builder: (cxt, __) => const NewbieBudgetPage()),
 ]);
