@@ -141,7 +141,7 @@ class _ListOutputState extends State<ListOutput> {
                 child: ListView.builder(
                   itemCount: ledgerList.length,
                   itemBuilder: (context, index) {
-                    return Container(
+                    return Card(
                       color: Color(0XFFFFD9D9),
                       child: ListTile(
                         leading: CircleAvatar(
@@ -150,6 +150,7 @@ class _ListOutputState extends State<ListOutput> {
                         title: Text(ledgerList[index].dname ?? 'No Name'),
                         subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
                         trailing: Text(ledgerList[index].price.toString() ?? 'No Amount'),
+                        
                         onTap: () {
                           print('You tapped on ${ledgerList[index].dname}');
                         },
