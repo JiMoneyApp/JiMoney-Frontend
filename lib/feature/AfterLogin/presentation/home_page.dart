@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/budget_display.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/buy_income_switch.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/date_button.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/dropdown_ledger.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 width: double.infinity,
-                child: TotalCost(),
+                child: BudgetDisplay(),
               ),
               Row(
                 children: [
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Container(
-                height: 332,
+                height: 320,
                 width: double.infinity,
                 child: ListOutput(),
               )

@@ -48,6 +48,8 @@ class _ListOutputState extends State<ListOutput> {
     
       userInfo.ledgerResponse =
           (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
+      
+      _sum();
 
       print(userInfo.ledgerResponse);
       // userId
@@ -70,8 +72,16 @@ class _ListOutputState extends State<ListOutput> {
     super.didChangeDependencies();
   }
 
-  final int sum = 0;
+  void _sum(){
+    int sum = 0;
+    for (int i = 0; i < userInfo.ledgerResponse.length; i++){
+      sum += userInfo.ledgerResponse[i].price!.toInt();
+    }
+    userInfo.sum = sum;
+    print(sum);
+  }
 
+  
   // @override
   // Widget build(BuildContext context) {
   //   return Scaffold(

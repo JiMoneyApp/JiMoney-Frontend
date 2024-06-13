@@ -10,6 +10,7 @@ class UserInfo {
   List<String> ledger = [];
   String selectedledger = "";
   List<Ledger> ledgerResponse;
+  int sum;
 
   UserInfo({
     required this.username,
@@ -22,5 +23,6 @@ class UserInfo {
     required this.ledger,
     required this.selectedledger,
     required this.ledgerResponse,
+    required this.sum,
   });
 }
