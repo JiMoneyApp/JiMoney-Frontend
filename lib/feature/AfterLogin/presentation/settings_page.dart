@@ -141,7 +141,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Container(
-                height: 180,
+                height: 130,
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
                   onPressed: () {},

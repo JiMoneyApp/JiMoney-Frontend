@@ -1,3 +1,4 @@
+import 'package:jimoney_frontend/DataBase/ledger.dart';
 class UserInfo {
   String username;
   String nickname;
@@ -8,6 +9,7 @@ class UserInfo {
   String noticetime = "";
   List<String> ledger = [];
   String selectedledger = "";
+  List<Ledger> ledgerResponse;
 
   UserInfo({
     required this.username,
@@ -19,5 +21,6 @@ class UserInfo {
     required this.noticetime,
     required this.ledger,
     required this.selectedledger,
+    required this.ledgerResponse,
   });
 }
