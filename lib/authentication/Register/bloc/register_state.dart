@@ -9,9 +9,8 @@ class RegisterLoading extends RegisterState {}
 
 class RegisterSuccess extends RegisterState {
   final String message;
-  final UserInfo userInfo;
 
-  RegisterSuccess(this.message, this.userInfo);
+  RegisterSuccess(this.message);
   // RegisterSuccess.successWithUserInfo(this.userInfo) : message = "Registration successful!";
 }
 
