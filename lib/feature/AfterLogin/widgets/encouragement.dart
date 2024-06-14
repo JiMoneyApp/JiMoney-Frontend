@@ -8,7 +8,7 @@ class Encouragement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 180,
       width: 600,
       alignment: Alignment.center,
       padding: EdgeInsets.fromLTRB(30, 80, 30, 10),

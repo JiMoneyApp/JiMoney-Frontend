@@ -17,6 +17,7 @@ class LoginPage extends StatelessWidget {
     return BlocProvider<LoginBloc>(
       create: (_) => LoginBloc(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
@@ -28,6 +29,7 @@ class LoginPage extends StatelessWidget {
             }
           },
           child: Container(
+            height: double.maxFinite,
             color: Color(0xFF559BCF),
             child: Column(
               children: [
@@ -142,7 +144,7 @@ class LoginPage extends StatelessWidget {
     BuildContext context,
   ) {
     return Container(
-      height: 100,
+      // height: 100,
       width: 350,
       alignment: Alignment.bottomCenter,
       child: TextField(

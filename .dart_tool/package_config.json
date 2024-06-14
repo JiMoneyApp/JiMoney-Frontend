@@ -213,7 +213,7 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.5",
+      "rootUri": "file:///Users/wangyichao/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -716,7 +716,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-06-13T17:32:48.983812Z",
+  "generated": "2024-06-14T07:13:23.093593Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }

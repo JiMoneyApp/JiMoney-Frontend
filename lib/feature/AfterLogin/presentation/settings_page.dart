@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateuser.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/head_sticker.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/logoutbutton.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -89,17 +90,28 @@ class _SettingsPageState extends State<SettingsPage> {
               // Daily Reminders
               // Daily Reminders
               Container(
-                padding: EdgeInsets.only(top: 30),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Daily Reminders",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
+                height: 70,
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 35, right: 35),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        Icon(Icons.notifications, color: Colors.black),
+                        SizedBox(width: 10),
+                        Text("Daily Reminders",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.black)),
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(320, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -107,90 +119,110 @@ class _SettingsPageState extends State<SettingsPage> {
               Container(
                 height: 70,
                 alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _showBudgetInputDialog(context);
-                  },
-                  child: Text("Change Budget",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 35, right: 35),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showBudgetInputDialog(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.money, color: Colors.black),
+                        SizedBox(width: 10),
+                        Text("Change Budget",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.black)),
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(320, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ),
               Container(
                 height: 70,
                 alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _showNicknameInputDialog(context);
-                  },
-                  child: Text("Change Nickname",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
-                  ),
-                ),
-              ),
-              Container(
-                height: 180,
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("About Us",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 35, right: 35),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showNicknameInputDialog(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.person, color: Colors.black),
+                        SizedBox(width: 10),
+                        Text("Change Nickname",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.black)),
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(320, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ),
               Container(
                 height: 70,
                 alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _showPasswordInputDialog(context);
-                  },
-                  child: Text("Change Password",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 35, right: 35),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showPasswordInputDialog(context);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.lock, color: Colors.black),
+                        SizedBox(width: 10),
+                        Text("Change Password",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.black)),
+                      ],
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(320, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ),
               Container(
                 height: 70,
                 alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.go("/login");
-                  },
-                  child: Text("Log Out",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 35, right: 35),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("About Us",
+                        style: TextStyle(fontSize: 20, color: Colors.black)),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(320, 50),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
+              ),
+              Container(
+                height: 70,
+                alignment: Alignment.bottomCenter,
+                child: LogoutButton(),
               )
             ],
           ),
@@ -233,7 +265,10 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Your current budget:' + userInfo.budget.toString()),
+          title: Text(
+            'Your current budget:\$${userInfo.budget.toString()}',
+            style: TextStyle(color: Colors.green),
+          ),
           content: Form(
             key: _formKey,
             child: TextFormField(
@@ -337,7 +372,7 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Your current nickname:' + userInfo.nickname),
+          title: Text('Your current password:' + userInfo.password),
           content: Form(
             key: _formKey,
             child: TextFormField(
