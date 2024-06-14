@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateuser.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/head_sticker.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/logoutbutton.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -177,20 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Container(
                 height: 70,
                 alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.go("/login");
-                  },
-                  child: Text("Log Out",
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(320, 50),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    shadowColor: Colors.black,
-                  ),
-                ),
+                child: LogoutButton(),
               )
             ],
           ),
@@ -233,7 +221,10 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Your current budget:' + userInfo.budget.toString()),
+          title: Text(
+            'Your current budget:\$${userInfo.budget.toString()}',
+            style: TextStyle(color: Colors.green),
+          ),
           content: Form(
             key: _formKey,
             child: TextFormField(
@@ -337,7 +328,7 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Your current nickname:' + userInfo.nickname),
+          title: Text('Your current password:' + userInfo.password),
           content: Form(
             key: _formKey,
             child: TextFormField(
