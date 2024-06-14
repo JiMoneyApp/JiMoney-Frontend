@@ -27,8 +27,8 @@ class BottomNavigation extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 BlocProvider.of<BottomNavigationBloc>(context)
-                    .add(NavigateToStatisticsEvent());
-                context.pushReplacement('/statistics');
+                    .add(NavigateToAnalyticsEvent());
+                context.pushReplacement('/analytics');
               },
               icon: Icon(Icons.analytics),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jimoney_frontend/authentication/Login/bloc/login_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/feature/common/application/boolean_cubit.dart';
+import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -21,6 +22,9 @@ class LoginPage extends StatelessWidget {
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
+              print("UUU");
+              BlocProvider.of<BottomNavigationBloc>(context)
+                  .add(NavigateToHomeEvent());
               context.push("/home");
             } else if (state is LoginFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
