@@ -1,19 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/budget_display.dart';
-import 'package:jimoney_frontend/feature/AfterLogin/widgets/buy_income_switch.dart';
-import 'package:jimoney_frontend/feature/AfterLogin/widgets/date_button.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/dropdown_ledger.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/encouragement.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/floating_action_button.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/ledger_delete_button.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/list_output.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/total_cost.dart';
-import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,10 +40,10 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     "Cost:",
                     style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -64,10 +59,10 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     "Budget:",
                     style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -83,8 +78,7 @@ class _HomePageState extends State<HomePage> {
                       width: 250,
                       height: 60,
                       padding: EdgeInsets.only(top: 15),
-                      child: LedgerSelector()
-                  ),
+                      child: LedgerSelector()),
                   Container(
                     width: 100,
                     height: 50,
