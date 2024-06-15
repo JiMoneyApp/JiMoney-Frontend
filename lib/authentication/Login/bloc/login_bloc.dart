@@ -18,6 +18,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginButtonPressed>(_onLoginButtonPressed);
     on<AccountChanged>(_onAccountChanged);
     on<LPasswordChanged>(_onPasswordChanged);
+    on<LogoutEvent>((event, emit) {
+      print("Home event");
+      emit(Logout());
+    });
   }
 
   Future<void> _onLoginButtonPressed(
@@ -61,6 +65,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onAccountChanged(AccountChanged event, Emitter<LoginState> emit) {
     final currentState = state;
     if (currentState is LoginFormState) {
+      print("ACChanged");
       emit(LoginFormState(
         isAccountValid: _isValidAccount(event.username),
         isPasswordValid: currentState.isPasswordValid,
@@ -71,6 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onPasswordChanged(LPasswordChanged event, Emitter<LoginState> emit) {
     final currentState = state;
     if (currentState is LoginFormState) {
+      print("PaChanged");
       emit(LoginFormState(
         isAccountValid: currentState.isAccountValid,
         isPasswordValid: _isValidPassword(event.password),
