@@ -8,14 +8,17 @@ class BottomNavigationBloc
     extends Bloc<BottomNavigationEvent, BottomNavigationState> {
   BottomNavigationBloc() : super(BottomNavigationInitial()) {
     on<NavigateToHomeEvent>((event, emit) {
+      print("Home event");
       emit(HomeScreenState());
     });
 
-    on<NavigateToStatisticsEvent>((event, emit) {
-      emit(StatisticsScreenState());
+    on<NavigateToAnalyticsEvent>((event, emit) {
+      print("Analytics event");
+      emit(AnalyticsScreenState());
     });
 
     on<NavigateToSettingsEvent>((event, emit) {
+      print("Settings event");
       emit(SettingsScreenState());
     });
   }

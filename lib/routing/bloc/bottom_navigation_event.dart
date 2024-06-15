@@ -5,6 +5,6 @@ abstract class BottomNavigationEvent {}
 
 class NavigateToHomeEvent extends BottomNavigationEvent {}
 
-class NavigateToStatisticsEvent extends BottomNavigationEvent {}
+class NavigateToAnalyticsEvent extends BottomNavigationEvent {}
 
 class NavigateToSettingsEvent extends BottomNavigationEvent {}

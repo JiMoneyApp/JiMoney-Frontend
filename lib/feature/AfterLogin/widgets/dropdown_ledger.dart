@@ -5,7 +5,6 @@ import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateledger.dart';
-import 'package:jimoney_frontend/DataBase/ledger.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class LedgerSelector extends StatefulWidget {
@@ -49,7 +48,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
       if (userId == null) {
         await _fetchUserId();
       }
-    
+
       userInfo.ledgerResponse =
           (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
 
@@ -62,7 +61,6 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     }
   }
 
-
   Future<void> _fetchLedger() async {
     //print("ERRORCHECCK1");
     isLoading = true;
@@ -73,8 +71,8 @@ class _LedgerSelectorState extends State<LedgerSelector> {
         await _fetchUserId();
       }
       userInfo.ledger = (await ledgerService.fetchLedgersName(userId!))!;
-      
-      if(firstTime){
+
+      if (firstTime) {
         userInfo.selectedledger = userInfo.ledger[0];
         firstTime = false;
       }
@@ -96,9 +94,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     try {
       ledgerService.insertLedger(userId!, ledger_name);
       print("Inserting ledger: $ledger_name");
-      setState(() {
-        
-      });
+      setState(() {});
       // userId
       // Now you can use the userId as needed
     } catch (e) {
@@ -133,7 +129,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                       _insertLedger(_ledgerController.text);
                     });
                     Navigator.of(context).pop();
-                  }else{
+                  } else {
                     print("NOt even close");
                     Navigator.of(context).pop();
                   }
@@ -164,38 +160,10 @@ class _LedgerSelectorState extends State<LedgerSelector> {
   }
 
   @override
-  void didChangeDependencies(){
+  void didChangeDependencies() {
     super.didChangeDependencies();
     _fetchLedger();
   }
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: DropdownButton<String>(
-//         value: userInfo.selectedledger,
-//         hint: Text('Select Ledger'),
-//         icon: Icon(Icons.arrow_drop_down),
-//         iconSize: 24,
-//         elevation: 16,
-//         style: TextStyle(color: Colors.black),
-//         underline: Container(
-//           height: 2,
-//           color: Colors.grey,
-//         ),
-//         onChanged: _onLedgerChanged,
-//         items: [
-
-//           ...userInfo.ledger.map((String ledger) {
-//             return DropdownMenuItem<String>(
-//               value: ledger,
-//               child: Text(ledger),
-//             );
-//           }).toList()
-//         ],
-//       ),
-//     );
-//   }
-// }
 
   @override
   Widget build(BuildContext context) {

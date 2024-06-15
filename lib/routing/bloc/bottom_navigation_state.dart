@@ -7,6 +7,6 @@ class BottomNavigationInitial extends BottomNavigationState {}
 
 class HomeScreenState extends BottomNavigationState {}
 
-class StatisticsScreenState extends BottomNavigationState {}
+class AnalyticsScreenState extends BottomNavigationState {}
 
 class SettingsScreenState extends BottomNavigationState {}
