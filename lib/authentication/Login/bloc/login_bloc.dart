@@ -41,6 +41,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         userInfo.rightHanded = true;
         userInfo.budget = budget!;
         userInfo.noticetime = noticetime!;
+        userInfo.uid = userId;
         // Optionally, store the userInfo in GetIt or another service
         emit(LoginSuccess());
       } else {

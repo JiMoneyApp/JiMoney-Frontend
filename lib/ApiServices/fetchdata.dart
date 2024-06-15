@@ -11,16 +11,16 @@ class DataService {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         print(response.body[0]);
-        print("STOP3");
+        //print("STOP3");
         List<dynamic> jsonResponse = jsonDecode(response.body);
-        print("STOP4");
+        //print("STOP4");
         return jsonResponse.map((data) => Ledger.fromJson(data)).toList();        
       }
       else{
-        print("DEADASFUCK");
+        //print("DEADASFUCK");
       }
     } catch (e) {
-      print("DEAD");
+      // print("DEAD");
       print("Error: $e");
       return [];
     }

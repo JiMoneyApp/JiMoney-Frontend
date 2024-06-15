@@ -11,6 +11,7 @@ class UserInfo {
   String selectedledger = "";
   List<Ledger> ledgerResponse;
   int sum;
+  int uid;
 
   UserInfo({
     required this.username,
@@ -24,5 +25,6 @@ class UserInfo {
     required this.selectedledger,
     required this.ledgerResponse,
     required this.sum,
+    required this.uid,
   });
 }

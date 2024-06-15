@@ -25,6 +25,7 @@ void setupLocator() {
         selectedledger: '',
         ledgerResponse: [],
         sum: 0,
+        uid: 0,
       ));
   locator.registerLazySingleton(() => UserUpdateService());
   locator.registerFactory(() => RegisterBloc());

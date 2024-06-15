@@ -26,34 +26,17 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     _fetchLedger();
   }
 
-  int? userId;
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print("userID = " + userId.toString());
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
-  }
 
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
-    print("ERRORCHECKK2");
+    //print("ERRORCHECKK2");
     try {
-      if (userId == null) {
-        await _fetchUserId();
-      }
     
       userInfo.ledgerResponse =
-          (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
+          (await dataService.fetchDatas(userInfo.uid, userInfo.selectedledger))!;
 
-      print(userInfo.ledgerResponse);
+      print("Success fetching Datas: " + userInfo.ledgerResponse.toString());
       // userId
       // Now you can use the userId as needed
     } catch (e) {
@@ -69,10 +52,8 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerService>();
     //print("ERRORCHECKK2");
     try {
-      if (userId == null) {
-        await _fetchUserId();
-      }
-      userInfo.ledger = (await ledgerService.fetchLedgersName(userId!))!;
+      
+      userInfo.ledger = (await ledgerService.fetchLedgersName(userInfo.uid))!;
       
       if(firstTime){
         userInfo.selectedledger = userInfo.ledger[0];
@@ -94,7 +75,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     //print("ERRORCHECKK2");
     try {
-      ledgerService.insertLedger(userId!, ledger_name);
+      ledgerService.insertLedger(userInfo.uid, ledger_name);
       print("Inserting ledger: $ledger_name");
       setState(() {
         
@@ -134,7 +115,6 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                     });
                     Navigator.of(context).pop();
                   }else{
-                    print("NOt even close");
                     Navigator.of(context).pop();
                   }
                 },
