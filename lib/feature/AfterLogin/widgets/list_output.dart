@@ -45,10 +45,10 @@ class _ListOutputState extends State<ListOutput> {
       setState(() {
         userInfo.ledgerResponse = [];
       });
-    
+
       userInfo.ledgerResponse =
           (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
-      
+
       _sum();
 
       print(userInfo.ledgerResponse);
@@ -72,16 +72,15 @@ class _ListOutputState extends State<ListOutput> {
     super.didChangeDependencies();
   }
 
-  void _sum(){
+  void _sum() {
     int sum = 0;
-    for (int i = 0; i < userInfo.ledgerResponse.length; i++){
+    for (int i = 0; i < userInfo.ledgerResponse.length; i++) {
       sum += userInfo.ledgerResponse[i].price!.toInt();
     }
     userInfo.sum = sum;
     print(sum);
   }
 
-  
   // @override
   // Widget build(BuildContext context) {
   //   return Scaffold(
@@ -124,11 +123,11 @@ class _ListOutputState extends State<ListOutput> {
         child: FutureBuilder<void>(
           future: _fetchDatas(),
           builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
               List<Ledger> ledgerList = userInfo.ledgerResponse;
               return Container(
                 width: double.maxFinite,
@@ -149,8 +148,8 @@ class _ListOutputState extends State<ListOutput> {
                         ),
                         title: Text(ledgerList[index].dname ?? 'No Name'),
                         subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
-                        trailing: Text(ledgerList[index].price.toString() ?? 'No Amount'),
-                        
+                        trailing: Text(
+                            ledgerList[index].price.toString() ?? 'No Amount'),
                         onTap: () {
                           print('You tapped on ${ledgerList[index].dname}');
                         },

@@ -155,6 +155,7 @@ class LoginPage extends StatelessWidget {
         keyboardType: TextInputType.text,
         cursorColor: Colors.blue,
         onChanged: (value) {
+          print("ChangedU");
           BlocProvider.of<LoginBloc>(context)
               .add(AccountChanged(username: value));
         },
@@ -199,6 +200,7 @@ class LoginPage extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 cursorColor: Colors.blue,
                 onChanged: (value) {
+                  print("ChangedP");
                   BlocProvider.of<LoginBloc>(context)
                       .add(LPasswordChanged(password: value));
                 },

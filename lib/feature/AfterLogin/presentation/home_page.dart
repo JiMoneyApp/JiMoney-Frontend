@@ -89,10 +89,12 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      Container(
-                        height: 320,
-                        width: double.infinity,
-                        child: ListOutput(),
+                      SingleChildScrollView(
+                        child: Container(
+                          height: 320,
+                          width: double.infinity,
+                          child: ListOutput(),
+                        ),
                       )
                     ],
                   ),
