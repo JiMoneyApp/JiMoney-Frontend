@@ -9,6 +9,7 @@ import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.d
 import 'package:jimoney_frontend/locator.dart';
 import 'package:jimoney_frontend/routing/auth_routes.dart';
 import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
+import 'package:jimoney_frontend/routing/bottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -36,37 +37,37 @@ class App extends StatelessWidget {
         routerConfig: authroutes,
         // routerDelegate: authroutes.routerDelegate,
         // routeInformationParser: authroutes.routeInformationParser,
-        builder: (context, child) {
-          return MultiBlocListener(listeners: [
-            BlocListener<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if (state is LoginSuccess) {
-                  context
-                      .read<BottomNavigationBloc>()
-                      .add(NavigateToHomeEvent());
-                  context.go(HomePage.path);
-                }
-              },
-            ),
-            BlocListener<BottomNavigationBloc, BottomNavigationState>(
-              listener: (context, state) {
-                if (state is HomeScreenState) {
-                  print("goH");
-                  authroutes.pushReplacement(HomePage.path);
-                  //GoRouter.of(context).go(HomePage.path);
-                } else if (state is AnalyticsScreenState) {
-                  print("goA");
-                  authroutes.pushReplacement(AnalyticsPage.path);
-                  //GoRouter.of(context)..go(AnalyticsPage.path);
-                } else if (state is SettingsScreenState) {
-                  print("goS");
-                  authroutes.pushReplacement(SettingsPage.path);
-                  //GoRouter.of(context).go(SettingsPage.path);
-                }
-              },
-            ),
-          ], child: child!);
-        },
+        // builder: (context, child) {
+        //   return MultiBlocListener(listeners: [
+        //     BlocListener<LoginBloc, LoginState>(
+        //       listener: (context, state) {
+        //         if (state is LoginSuccess) {
+        //           context
+        //               .read<BottomNavigationBloc>()
+        //               .add(NavigateToHomeEvent());
+        //           context.go(HomePage.path);
+        //         }
+        //       },
+        //     ),
+        //     BlocListener<BottomNavigationBloc, BottomNavigationState>(
+        //       listener: (context, state) {
+        //         if (state is HomeScreenState) {
+        //           print("goH");
+        //           authroutes.pushReplacement(HomePage.path);
+        //           //GoRouter.of(context).go(HomePage.path);
+        //         } else if (state is AnalyticsScreenState) {
+        //           //print("goA");
+        //           authroutes.pushReplacement(AnalyticsPage.path);
+        //           //GoRouter.of(context)..go(AnalyticsPage.path);
+        //         } else if (state is SettingsScreenState) {
+        //           print("goS");
+        //           authroutes.pushReplacement(SettingsPage.path);
+        //           //GoRouter.of(context).go(SettingsPage.path);
+        //         }
+        //       },
+        //     ),
+        //   ], child: child!);
+        // },
       ),
     );
   }

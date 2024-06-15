@@ -23,8 +23,8 @@ class LoginPage extends StatelessWidget {
             print("UUU");
             BlocProvider.of<BottomNavigationBloc>(context)
                 .add(NavigateToHomeEvent());
-            // context.push("/home");
-            GoRouter.of(context).go("/home");
+            context.push("/mainpage");
+            //GoRouter.of(context).go("/home");
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.error)),

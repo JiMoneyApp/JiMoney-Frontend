@@ -20,7 +20,9 @@ class BottomNavigation extends StatelessWidget {
                     .add(NavigateToHomeEvent());
                 //Navigator.of(context).pushReplacementNamed('/home');
               },
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+              ),
             ),
           ),
           SizedBox(

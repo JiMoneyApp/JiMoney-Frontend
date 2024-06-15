@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimoney_frontend/authentication/AfterLogin/main_presentation.dart';
 import 'package:jimoney_frontend/authentication/Login/bloc/login_bloc.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
@@ -26,16 +27,20 @@ final GoRouter authroutes = GoRouter(
       builder: (cxt, __) => const RegisterPage(),
     ),
     GoRoute(
-      path: HomePage.path,
-      builder: (cxt, __) => const HomePage(),
-    ),
-    GoRoute(
-      path: AnalyticsPage.path,
-      builder: (cxt, __) => const AnalyticsPage(),
-    ),
-    GoRoute(
-      path: SettingsPage.path,
-      builder: (cxt, __) => const SettingsPage(),
-    ),
+      path: MainPage.path,
+      builder: (cxt, state) => const MainPage(),
+    )
+    // GoRoute(
+    //   path: HomePage.path,
+    //   builder: (cxt, __) => const HomePage(),
+    // ),
+    // GoRoute(
+    //   path: AnalyticsPage.path,
+    //   builder: (cxt, __) => const AnalyticsPage(),
+    // ),
+    // GoRoute(
+    //   path: SettingsPage.path,
+    //   builder: (cxt, __) => const SettingsPage(),
+    // ),
   ],
 );

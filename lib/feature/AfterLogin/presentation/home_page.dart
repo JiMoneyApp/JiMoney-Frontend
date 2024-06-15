@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/budget_display.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/dropdown_ledger.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/encouragement.dart';
@@ -11,12 +10,9 @@ import 'package:jimoney_frontend/feature/AfterLogin/widgets/ledger_delete_button
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/list_output.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/total_cost.dart';
 import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
-import 'package:jimoney_frontend/routing/bottomNavigationBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
-  static String path = "/home";
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -103,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            bottomNavigationBar: BottomNavigation(),
             floatingActionButton: FloatingActionButtonExample(),
           ),
         );

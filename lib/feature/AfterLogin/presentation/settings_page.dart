@@ -4,18 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateuser.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/head_sticker.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/logoutbutton.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
-import 'package:jimoney_frontend/routing/bottomNavigationBar.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
-
-  static String path = "/settings";
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -230,35 +226,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigation(),
-        // BottomAppBar(
-        //   child: Row(
-        //     mainAxisSize: MainAxisSize.max,
-        //     mainAxisAlignment: MainAxisAlignment.start,
-        //     children: <Widget>[
-        //       SizedBox(
-        //         child: IconButton(
-        //             onPressed: () async {
-        //               context.go("/home");
-        //             },
-        //             icon: Icon(Icons.home)),
-        //         width: 120,
-        //       ),
-        //       SizedBox(
-        //         child: IconButton(
-        //             onPressed: () async {
-        //               context.go("/analytics");
-        //             },
-        //             icon: Icon(Icons.analytics)),
-        //         width: 120,
-        //       ),
-        //       SizedBox(
-        //           child:
-        //               IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
-        //           width: 120),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

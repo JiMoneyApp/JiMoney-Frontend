@@ -5,12 +5,9 @@ import 'package:jimoney_frontend/feature/AfterLogin/widgets/buy_income_switch.da
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/day_month_year_switch.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/pie_chart.dart';
 import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
-import 'package:jimoney_frontend/routing/bottomNavigationBar.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
-
-  static String path = "/analytics";
 
   @override
   State<AnalyticsPage> createState() => _AnalyticsPageState();
@@ -42,7 +39,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
             );
           },
         ),
-        bottomNavigationBar: BottomNavigation(),
       ),
     );
   }

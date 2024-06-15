@@ -164,34 +164,6 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     super.didChangeDependencies();
     _fetchLedger();
   }
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: DropdownButton<String>(
-//         value: userInfo.selectedledger,
-//         hint: Text('Select Ledger'),
-//         icon: Icon(Icons.arrow_drop_down),
-//         iconSize: 24,
-//         elevation: 16,
-//         style: TextStyle(color: Colors.black),
-//         underline: Container(
-//           height: 2,
-//           color: Colors.grey,
-//         ),
-//         onChanged: _onLedgerChanged,
-//         items: [
-
-//           ...userInfo.ledger.map((String ledger) {
-//             return DropdownMenuItem<String>(
-//               value: ledger,
-//               child: Text(ledger),
-//             );
-//           }).toList()
-//         ],
-//       ),
-//     );
-//   }
-// }
 
   @override
   Widget build(BuildContext context) {
