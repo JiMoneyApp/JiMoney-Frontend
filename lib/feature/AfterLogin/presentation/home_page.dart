@@ -25,85 +25,89 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.maxFinite,
-      child: Scaffold(
-        body: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-          builder: (context, state) {
-            return Container(
-              color: Color(0XFFFFD9D9),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: double.infinity,
-                    child: Encouragement(),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 10),
-                      child: Text(
-                        "Cost:",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold,
+    return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+      builder: (context, state) {
+        return Container(
+          height: double.maxFinite,
+          child: Scaffold(
+            body: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+              builder: (context, state) {
+                return Container(
+                  color: Color(0XFFFFD9D9),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: double.infinity,
+                        child: Encouragement(),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30, bottom: 10),
+                          child: Text(
+                            "Cost:",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: TotalCost(),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 10),
-                      child: Text(
-                        "Budget:",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        width: double.infinity,
+                        child: TotalCost(),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30, bottom: 10),
+                          child: Text(
+                            "Budget:",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: BudgetDisplay(),
-                  ),
-                  Row(
-                    children: [
                       Container(
-                          color: Color(0XFFFFD9D9),
-                          width: 250,
-                          height: 60,
-                          padding: EdgeInsets.only(top: 15),
-                          child: LedgerSelector()),
+                        width: double.infinity,
+                        child: BudgetDisplay(),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              color: Color(0XFFFFD9D9),
+                              width: 250,
+                              height: 60,
+                              padding: EdgeInsets.only(top: 15),
+                              child: LedgerSelector()),
+                          Container(
+                            width: 100,
+                            height: 50,
+                            child: LedgerDeleteButton(),
+                          )
+                        ],
+                      ),
                       Container(
-                        width: 100,
-                        height: 50,
-                        child: LedgerDeleteButton(),
+                        height: 320,
+                        width: double.infinity,
+                        child: ListOutput(),
                       )
                     ],
                   ),
-                  Container(
-                    height: 320,
-                    width: double.infinity,
-                    child: ListOutput(),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
-        bottomNavigationBar: BottomNavigation(),
-        floatingActionButton: FloatingActionButtonExample(),
-      ),
+                );
+              },
+            ),
+            bottomNavigationBar: BottomNavigation(),
+            floatingActionButton: FloatingActionButtonExample(),
+          ),
+        );
+      },
     );
   }
 }

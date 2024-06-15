@@ -15,9 +15,10 @@ class BottomNavigation extends StatelessWidget {
             width: 120,
             child: IconButton(
               onPressed: () {
+                print("onH");
                 BlocProvider.of<BottomNavigationBloc>(context)
                     .add(NavigateToHomeEvent());
-                context.pushReplacement('/home');
+                //Navigator.of(context).pushReplacementNamed('/home');
               },
               icon: Icon(Icons.home),
             ),
@@ -26,9 +27,10 @@ class BottomNavigation extends StatelessWidget {
             width: 120,
             child: IconButton(
               onPressed: () {
+                print("onA");
                 BlocProvider.of<BottomNavigationBloc>(context)
                     .add(NavigateToAnalyticsEvent());
-                context.pushReplacement('/analytics');
+                //Navigator.of(context).pushReplacementNamed('/analytics');
               },
               icon: Icon(Icons.analytics),
             ),
@@ -37,9 +39,10 @@ class BottomNavigation extends StatelessWidget {
             width: 120,
             child: IconButton(
               onPressed: () {
+                print("onS");
                 BlocProvider.of<BottomNavigationBloc>(context)
                     .add(NavigateToSettingsEvent());
-                context.pushReplacement('/settings');
+                // Navigator.of(context).pushReplacementNamed('/settings');
               },
               icon: Icon(Icons.settings),
             ),
@@ -50,13 +53,13 @@ class BottomNavigation extends StatelessWidget {
   }
 }
 
-enum RootPage {
-  home("home"),
-  statistics("statistics"),
-  settings("settings");
+// enum RootPage {
+//   home("home"),
+//   statistics("statistics"),
+//   settings("settings");
 
-  final String display;
-  final String unselectedImage, selectedImage;
-  const RootPage(this.display,
-      {this.unselectedImage = '', this.selectedImage = ''});
-}
+//   final String display;
+//   final String unselectedImage, selectedImage;
+//   const RootPage(this.display,
+//       {this.unselectedImage = '', this.selectedImage = ''});
+// }

@@ -10,6 +10,7 @@ import 'package:jimoney_frontend/ApiServices/updateuser.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/head_sticker.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/logoutbutton.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
+import 'package:jimoney_frontend/routing/bottomNavigationBar.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -36,6 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
     try {
       userId =
           await userService.fetchUserId(userInfo.username, userInfo.password);
+      print(userId);
       // userId;
       // Now you can use the userId as needed
     } catch (e) {
@@ -152,6 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       _showNicknameInputDialog(context);
+                      print('Change Nickname');
                     },
                     child: Row(
                       children: [
@@ -227,32 +230,35 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-            child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              child: IconButton(
-                  onPressed: () async {
-                    context.go("/home");
-                  },
-                  icon: Icon(Icons.home)),
-              width: 120,
-            ),
-            SizedBox(
-              child: IconButton(
-                  onPressed: () async {
-                    context.go("/analytics");
-                  },
-                  icon: Icon(Icons.analytics)),
-              width: 120,
-            ),
-            SizedBox(
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
-                width: 120),
-          ],
-        )),
+        bottomNavigationBar: BottomNavigation(),
+        // BottomAppBar(
+        //   child: Row(
+        //     mainAxisSize: MainAxisSize.max,
+        //     mainAxisAlignment: MainAxisAlignment.start,
+        //     children: <Widget>[
+        //       SizedBox(
+        //         child: IconButton(
+        //             onPressed: () async {
+        //               context.go("/home");
+        //             },
+        //             icon: Icon(Icons.home)),
+        //         width: 120,
+        //       ),
+        //       SizedBox(
+        //         child: IconButton(
+        //             onPressed: () async {
+        //               context.go("/analytics");
+        //             },
+        //             icon: Icon(Icons.analytics)),
+        //         width: 120,
+        //       ),
+        //       SizedBox(
+        //           child:
+        //               IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+        //           width: 120),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
