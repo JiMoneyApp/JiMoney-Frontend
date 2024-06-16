@@ -55,8 +55,7 @@ class LogoutButton extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
-                context.push("/login");
+                context.pop();
               },
             ),
             TextButton(
