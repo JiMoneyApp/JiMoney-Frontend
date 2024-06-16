@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/DataBase/ledger.dart';
@@ -37,7 +34,7 @@ class _ListOutputState extends State<ListOutput> {
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
-    print("ERRORCHECKK2");
+    print("ERRORCHECKKLL2");
     try {
       if (userId == null) {
         await _fetchUserId();

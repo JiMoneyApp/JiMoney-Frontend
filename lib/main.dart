@@ -35,39 +35,6 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: authroutes,
-        // routerDelegate: authroutes.routerDelegate,
-        // routeInformationParser: authroutes.routeInformationParser,
-        // builder: (context, child) {
-        //   return MultiBlocListener(listeners: [
-        //     BlocListener<LoginBloc, LoginState>(
-        //       listener: (context, state) {
-        //         if (state is LoginSuccess) {
-        //           context
-        //               .read<BottomNavigationBloc>()
-        //               .add(NavigateToHomeEvent());
-        //           context.go(HomePage.path);
-        //         }
-        //       },
-        //     ),
-        //     BlocListener<BottomNavigationBloc, BottomNavigationState>(
-        //       listener: (context, state) {
-        //         if (state is HomeScreenState) {
-        //           print("goH");
-        //           authroutes.pushReplacement(HomePage.path);
-        //           //GoRouter.of(context).go(HomePage.path);
-        //         } else if (state is AnalyticsScreenState) {
-        //           //print("goA");
-        //           authroutes.pushReplacement(AnalyticsPage.path);
-        //           //GoRouter.of(context)..go(AnalyticsPage.path);
-        //         } else if (state is SettingsScreenState) {
-        //           print("goS");
-        //           authroutes.pushReplacement(SettingsPage.path);
-        //           //GoRouter.of(context).go(SettingsPage.path);
-        //         }
-        //       },
-        //     ),
-        //   ], child: child!);
-        // },
       ),
     );
   }

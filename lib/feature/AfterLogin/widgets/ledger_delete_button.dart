@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateledger.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
+
+import '../../bloc/ledger_bloc.dart';
 
 class LedgerDeleteButton extends StatefulWidget {
   const LedgerDeleteButton({super.key});
@@ -14,14 +18,11 @@ class LedgerDeleteButton extends StatefulWidget {
 
 class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
-
-  int? userId;
+  bool isLoading = true;
   Future<void> _fetchUserId() async {
     final UserService userService = GetIt.instance<UserService>();
     try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print("userID = " + userId.toString());
+      print("userID = " + userInfo.uid.toString());
       // userId;
       // Now you can use the userId as needed
     } catch (e) {
@@ -30,16 +31,31 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
     }
   }
 
+  Future<void> _fetchLedger() async {
+    //print("ERRORCHECCK1");
+    isLoading = true;
+    final ledgerService = GetIt.instance<LedgerService>();
+    //print("ERRORCHECKK2");
+    try {
+      userInfo.ledger = (await ledgerService.fetchLedgersName(userInfo.uid!))!;
+      print("selected Ledger = " + userInfo.selectedledger);
+      // userId
+      // Now you can use the userId as needed
+    } catch (e) {
+      isLoading = false;
+      print("Error fetching ledger: $e");
+      // return null;
+    }
+  }
+
   Future<void> _deleteLedger(String ledger_name) async {
     //print("ERRORCHECCK1");
-    if (userId == null) {
-      await _fetchUserId();
-    }
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     //print("ERRORCHECKK2");
     try {
-      ledgerService.deleteLedger(userId!, ledger_name);
-      print("Inserting ledger: $ledger_name");
+      await ledgerService.deleteLedger(userInfo.uid!, ledger_name);
+      await _fetchLedger();
+      print("Deleting ledger: $ledger_name");
       // userId
       // Now you can use the userId as needed
     } catch (e) {
@@ -72,7 +88,15 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
             TextButton(
               child: Text('Delete'),
               onPressed: () {
-                _deleteLedger(ledgerName);
+                setState(() {
+                  // BlocProvider.of<LedgerBloc>(context)
+                  //     .add(LedgerDeletedEvent(ledgerName));
+                  _deleteLedger(ledgerName);
+                });
+                // BlocProvider.of<LedgerBloc>(context)
+                //     .add(LedgerDeletedEvent(ledgerName));
+                // _deleteLedger(ledgerName);
+                //_deleteLedger(ledgerName);
                 Navigator.of(context).pop();
               },
             ),
@@ -81,14 +105,18 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
       },
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
         _confirmDelete(userInfo.selectedledger);
       },
-      child: Text("Delete Ledger", style: TextStyle(fontSize: 12), textAlign: TextAlign.center,),
+      child: Text(
+        "Delete Ledger",
+        style: TextStyle(fontSize: 12),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

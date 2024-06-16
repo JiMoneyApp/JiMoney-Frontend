@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
-import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateledger.dart';
+import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class LedgerSelector extends StatefulWidget {
@@ -17,7 +18,6 @@ class LedgerSelector extends StatefulWidget {
 class _LedgerSelectorState extends State<LedgerSelector> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
   bool isLoading = true;
-  bool firstTime = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -25,32 +25,13 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     _fetchLedger();
   }
 
-  int? userId;
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print("userID = " + userId.toString());
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
-  }
-
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
     print("ERRORCHECKK2");
     try {
-      if (userId == null) {
-        await _fetchUserId();
-      }
-
-      userInfo.ledgerResponse =
-          (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
+      userInfo.ledgerResponse = (await dataService.fetchDatas(
+          userInfo.uid!, userInfo.selectedledger))!;
 
       print(userInfo.ledgerResponse);
       // userId
@@ -67,16 +48,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerService>();
     //print("ERRORCHECKK2");
     try {
-      if (userId == null) {
-        await _fetchUserId();
-      }
-      userInfo.ledger = (await ledgerService.fetchLedgersName(userId!))!;
-
-      if (firstTime) {
-        userInfo.selectedledger = userInfo.ledger[0];
-        firstTime = false;
-      }
-      isLoading = false;
+      userInfo.ledger = (await ledgerService.fetchLedgersName(userInfo.uid!))!;
       print("selected Ledger = " + userInfo.selectedledger);
       // userId
       // Now you can use the userId as needed
@@ -92,9 +64,11 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     //print("ERRORCHECKK2");
     try {
-      ledgerService.insertLedger(userId!, ledger_name);
+      await ledgerService.insertLedger(userInfo.uid!, ledger_name);
+      await _fetchLedger();
+      BlocProvider.of<LedgerBloc>(context).add(LedgerAddedEvent());
       print("Inserting ledger: $ledger_name");
-      setState(() {});
+
       // userId
       // Now you can use the userId as needed
     } catch (e) {
@@ -124,11 +98,15 @@ class _LedgerSelectorState extends State<LedgerSelector> {
               ElevatedButton(
                 onPressed: () {
                   if (_ledgerController.text.isNotEmpty) {
+                    //print("Inserting ledger: ${_ledgerController.text}");
+                    //_insertLedger(_ledgerController.text);
                     setState(() {
                       print("Inserting ledger: ${_ledgerController.text}");
                       _insertLedger(_ledgerController.text);
                     });
+
                     Navigator.of(context).pop();
+                    print("Pop");
                   } else {
                     print("NOt even close");
                     Navigator.of(context).pop();
@@ -151,12 +129,12 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     if (newLedger == 'add_new') {
       _showAddLedgerDialog(context);
     } else {
-      setState(() {
-        userInfo.selectedledger = newLedger!;
-      });
+      print("Y");
+      BlocProvider.of<LedgerBloc>(context).add(LedgerSelectedEvent(newLedger!));
     }
     // Add your logic here to handle ledger switch
     print("Switched to ledger: $newLedger");
+    print("The new ledger is: ${userInfo.selectedledger}");
   }
 
   @override
@@ -176,30 +154,37 @@ class _LedgerSelectorState extends State<LedgerSelector> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return DropdownButton<String>(
-              value: userInfo.selectedledger,
-              hint: Text('Select Ledger'),
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: 24,
-              elevation: 16,
-              style: TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.grey,
-              ),
-              onChanged: _onLedgerChanged,
-              items: [
-                DropdownMenuItem<String>(
-                  value: 'add_new',
-                  child: Text('Add New Ledger'),
-                ),
-                ...userInfo.ledger.map((String ledger) {
-                  return DropdownMenuItem<String>(
-                    value: ledger,
-                    child: Text(ledger),
-                  );
-                }).toList()
-              ],
+            return BlocBuilder<LedgerBloc, LedgerState>(
+              builder: (context, state) {
+                print("selectedLLL" + userInfo.selectedledger);
+                return DropdownButton<String>(
+                  value: state is LedgerInitial
+                      ? userInfo.selectedledger = userInfo.ledger[0]
+                      : userInfo.selectedledger,
+                  hint: Text('Select Ledger'),
+                  icon: Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.black),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.grey,
+                  ),
+                  onChanged: _onLedgerChanged,
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'add_new',
+                      child: Text('Add New Ledger'),
+                    ),
+                    ...userInfo.ledger.map((String ledger) {
+                      return DropdownMenuItem<String>(
+                        value: ledger,
+                        child: Text(ledger),
+                      );
+                    }).toList()
+                  ],
+                );
+              },
             );
           }
         },

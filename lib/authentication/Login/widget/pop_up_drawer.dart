@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
-import 'package:jimoney_frontend/authentication/Register/presentation/register_page.dart';
 
 class PopUpDrawer extends StatelessWidget {
   PopUpDrawer({super.key});
