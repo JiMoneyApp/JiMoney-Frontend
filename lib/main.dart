@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimoney_frontend/authentication/Login/bloc/login_bloc.dart';
 import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
-import 'package:jimoney_frontend/feature/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.dart';
 import 'package:jimoney_frontend/locator.dart';

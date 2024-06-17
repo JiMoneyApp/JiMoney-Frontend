@@ -11,11 +11,13 @@ class BottomNavigation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            width: 120,
+            width: 180,
             child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
               builder: (context, state) {
                 return IconButton(
-                  color: state is HomeScreenState ? Colors.blue : Colors.black,
+                  color: state is HomeScreenState
+                      ? Color(0XFFF84490)
+                      : Colors.black,
                   onPressed: () {
                     print("onH");
                     BlocProvider.of<BottomNavigationBloc>(context)
@@ -35,38 +37,13 @@ class BottomNavigation extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 120,
+            width: 180,
             child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
               builder: (context, state) {
                 return IconButton(
-                  color: state is AnalyticsScreenState
-                      ? Colors.blue
+                  color: state is SettingsScreenState
+                      ? Color(0XFFF84490)
                       : Colors.black,
-                  onPressed: () {
-                    print("onA");
-                    BlocProvider.of<BottomNavigationBloc>(context)
-                        .add(NavigateToAnalyticsEvent());
-                    //Navigator.of(context).pushReplacementNamed('/analytics');
-                  },
-                  icon: Column(
-                    children: [
-                      Icon(
-                        Icons.analytics,
-                      ),
-                      //Text("Analytics"),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            width: 120,
-            child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-              builder: (context, state) {
-                return IconButton(
-                  color:
-                      state is SettingsScreenState ? Colors.blue : Colors.black,
                   onPressed: () {
                     print("onS");
                     BlocProvider.of<BottomNavigationBloc>(context)
