@@ -78,11 +78,12 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: [
                           Container(
-                              color: Color(0XFFFFD9D9),
-                              width: 250,
-                              height: 60,
-                              padding: EdgeInsets.only(top: 15),
-                              child: LedgerSelector()),
+                            color: Color(0XFFFFD9D9),
+                            width: 250,
+                            height: 60,
+                            padding: EdgeInsets.only(top: 15),
+                            child: LedgerSelector(),
+                          ),
                           Container(
                             width: 100,
                             height: 50,
@@ -94,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
+                      SizedBox(height: 10),
                       SingleChildScrollView(
                         child: Container(
                           height: 320,

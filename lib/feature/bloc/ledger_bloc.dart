@@ -17,6 +17,7 @@ class LedgerBloc extends Bloc<LedgerEvent, LedgerState> {
     print("LedgerSelectedEvent triggered");
     print(state);
     userInfo.selectedledger = event.selectedLedger;
+    print(userInfo.selectedledger);
     emit(LedgerSelectedState(selectedLedger: event.selectedLedger));
   }
 

@@ -19,17 +19,6 @@ class LedgerDeleteButton extends StatefulWidget {
 class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
   bool isLoading = true;
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      print("userID = " + userInfo.uid.toString());
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
-  }
 
   Future<void> _fetchLedger() async {
     //print("ERRORCHECCK1");
@@ -68,7 +57,7 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
     return showDialog<void>(
       context: context,
       barrierDismissible: true, // user must tap button!
-      builder: (BuildContext context) {
+      builder: (dialog_context) {
         return AlertDialog(
           title: Text('Confirm Delete'),
           content: SingleChildScrollView(
@@ -89,8 +78,8 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
               child: Text('Delete'),
               onPressed: () {
                 setState(() {
-                  // BlocProvider.of<LedgerBloc>(context)
-                  //     .add(LedgerDeletedEvent(ledgerName));
+                  BlocProvider.of<LedgerBloc>(context)
+                      .add(LedgerDeletedEvent(ledgerName));
                   _deleteLedger(ledgerName);
                 });
                 // BlocProvider.of<LedgerBloc>(context)
@@ -108,15 +97,17 @@ class _LedgerDeleteButtonState extends State<LedgerDeleteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        _confirmDelete(userInfo.selectedledger);
-      },
-      child: Text(
-        "Delete Ledger",
-        style: TextStyle(fontSize: 12),
-        textAlign: TextAlign.center,
-      ),
-    );
+    return Builder(builder: (context) {
+      return ElevatedButton(
+        onPressed: () {
+          _confirmDelete(userInfo.selectedledger);
+        },
+        child: Text(
+          "Delete Ledger",
+          style: TextStyle(fontSize: 12),
+          textAlign: TextAlign.center,
+        ),
+      );
+    });
   }
 }

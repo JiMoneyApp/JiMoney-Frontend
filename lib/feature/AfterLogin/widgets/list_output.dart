@@ -128,12 +128,14 @@ class _ListOutputState extends State<ListOutput> {
               List<Ledger> ledgerList = userInfo.ledgerResponse;
               return Container(
                 width: double.maxFinite,
+                //height: double.maxFinite,
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
-                    border: Border.all(color: Colors.grey)),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  //border: Border.all(color: Colors.grey)
+                ),
                 child: ListView.builder(
                   itemCount: ledgerList.length,
                   itemBuilder: (context, index) {
