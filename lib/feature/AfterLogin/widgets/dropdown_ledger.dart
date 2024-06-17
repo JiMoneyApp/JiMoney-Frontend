@@ -30,10 +30,10 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerService>();
     try {
       userInfo.ledger = (await ledgerService.fetchLedgersName(userInfo.uid!))!;
-      if (userInfo.ledger.isNotEmpty) {
-        context.read<LedgerBloc>().add(LedgerSelectedEvent(userInfo.ledger[0]));
-      }
-      print("selected Ledger = " + userInfo.selectedledger);
+      // if (userInfo.ledger.isNotEmpty) {
+      //   context.read<LedgerBloc>().add(LedgerSelectedEvent(userInfo.ledger[0]));
+      // }
+      print("SSSSelected Ledger = " + userInfo.ledger[0]);
     } catch (e) {
       print("Error fetching ledger: $e");
     } finally {
@@ -47,6 +47,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     try {
       await ledgerService.insertLedger(userInfo.uid!, ledgerName);
+      await _fetchLedger();
       BlocProvider.of<LedgerBloc>(context).add(LedgerAddedEvent());
       print("Inserting ledger: $ledgerName");
     } catch (e) {
@@ -58,6 +59,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     try {
       await ledgerService.deleteLedger(userInfo.uid!, ledgerName);
+      await _fetchLedger();
       BlocProvider.of<LedgerBloc>(context).add(LedgerDeletedEvent(ledgerName));
       print("Deleting ledger: $ledgerName");
     } catch (e) {
@@ -110,36 +112,59 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     showDialog<void>(
       context: context,
       barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirm Delete'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Are you sure you want to delete $ledgerName?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Delete'),
-              onPressed: () {
-                setState(() {
-                  BlocProvider.of<LedgerBloc>(context)
-                      .add(LedgerDeletedEvent(ledgerName));
-                  _deleteLedger(ledgerName);
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+      builder: (BuildContext decontext) {
+        print("Ledger length: ${userInfo.ledger.length}");
+        return userInfo.ledger.length == 1
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Text('Error!'),
+                  ],
+                ),
+                content: Text('You cannot delete the last ledger'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Close',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              )
+            : AlertDialog(
+                title: Text('Confirm Delete'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('Are you sure you want to delete $ledgerName?'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Delete',
+                      style: TextStyle(color: Colors.redAccent),
+                    ),
+                    onPressed: () {
+                      _deleteLedger(ledgerName);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
       },
     );
   }
@@ -171,13 +196,14 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: DropdownButton<String>(
-                    value: state is LedgerInitial
-                        ? userInfo.selectedledger = userInfo.ledger[0]
-                        : userInfo.selectedledger,
+                    value: state is LedgerSelectedState
+                        ? userInfo.selectedledger
+                        : userInfo.selectedledger = userInfo.ledger[0],
                     hint: Text('Select Ledger'),
                     icon: Icon(Icons.arrow_drop_down),
                     iconSize: 24,
                     elevation: 16,
+                    borderRadius: BorderRadius.circular(8),
                     style: TextStyle(color: Colors.black),
                     underline: SizedBox(),
                     dropdownColor: Colors.white,
@@ -186,13 +212,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                       ...userInfo.ledger.map((String ledger) {
                         return DropdownMenuItem<String>(
                           value: ledger,
-                          child: InkWell(
-                            onLongPress: () {
-                              print("OnLongPress");
-                              _confirmDelete(ledger);
-                            },
-                            child: Text(ledger),
-                          ),
+                          child: Text(ledger),
                         );
                       }).toList(),
                       DropdownMenuItem<String>(
@@ -210,9 +230,23 @@ class _LedgerSelectorState extends State<LedgerSelector> {
             actions: [
               ElevatedButton(
                 onPressed: () {
+                  print("Deleting ledger:" + '${userInfo.selectedledger}');
+                  _confirmDelete(userInfo.selectedledger);
+                },
+                child: Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.redAccent),
+                ),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Close'),
+                child: Text(
+                  'Close',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -237,7 +271,9 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                 _showLedgerSelectorDialog(context);
               },
               child: Text(
-                '${userInfo.selectedledger}',
+                state is LedgerInitial
+                    ? '${userInfo.ledger[0]}'
+                    : '${userInfo.selectedledger}',
                 style: TextStyle(color: Colors.black),
               ));
         },
