@@ -9,6 +9,15 @@ class DataUpdateService {
       int price, String data_name, String data_type, String data_date) async {
     final url = Uri.parse(
         "$baseUrl/data/insert_new_data?user_id=$userId&ledger_name=$ledger_name");
+
+    // 打印调试信息
+    print("userId: $userId");
+    print("ledger_name: $ledger_name");
+    print("price: $price");
+    print("data_name: $data_name");
+    print("data_type: $data_type");
+    print("data_date: $data_date");
+
     try {
       final response = await http.post(
         url,
@@ -24,15 +33,22 @@ class DataUpdateService {
           'data_date': data_date,
         }),
       );
+
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
       if (response.statusCode == 200) {
         print('Insert Data:$data_name Successfully');
-        print("Response body: ${response.body}");
+        return jsonDecode(response.body)
+            .map<Ledger>((json) => Ledger.fromJson(json))
+            .toList();
       } else {
         print("Failed to insert data into $ledger_name");
-        print("Response body: ${response.body}");
+        return null;
       }
     } catch (e) {
       print("Error: $e");
+      return null;
     }
   }
 

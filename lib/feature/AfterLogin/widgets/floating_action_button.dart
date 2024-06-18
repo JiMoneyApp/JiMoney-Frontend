@@ -30,7 +30,7 @@ class _FloatingActionButtonExampleState
           formattedDate);
       print("Inserting Success");
     } catch (e) {
-      print("Error inserting data: $e");
+      print("ERORR inserting data: $e");
     }
   }
 
