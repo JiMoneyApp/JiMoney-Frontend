@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
 import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
+import 'package:jimoney_frontend/ApiServices/updatedata.dart';
 import 'package:jimoney_frontend/ApiServices/updateuser.dart';
 import 'package:jimoney_frontend/ApiServices/updateledger.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
@@ -33,4 +34,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => LedgerService());
   locator.registerLazySingleton(() => LedgerUpdateService());
   locator.registerLazySingleton(() => DataService());
+  locator.registerLazySingleton(() => DataUpdateService());
 }

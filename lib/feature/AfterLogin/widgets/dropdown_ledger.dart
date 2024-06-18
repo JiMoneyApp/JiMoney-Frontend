@@ -269,7 +269,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
               },
               child: Text(
                 state is LedgerInitial
-                    ? '${userInfo.ledger[0]}'
+                    ? '${userInfo.selectedledger = userInfo.ledger[0]}'
                     : '${userInfo.selectedledger}',
                 style: TextStyle(color: Colors.black),
               ));

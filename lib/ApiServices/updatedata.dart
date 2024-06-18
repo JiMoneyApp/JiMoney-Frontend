@@ -26,8 +26,10 @@ class DataUpdateService {
       );
       if (response.statusCode == 200) {
         print('Insert Data:$data_name Successfully');
+        print("Response body: ${response.body}");
       } else {
         print("Failed to insert data into $ledger_name");
+        print("Response body: ${response.body}");
       }
     } catch (e) {
       print("Error: $e");

@@ -3,26 +3,24 @@ import 'package:http/http.dart' as http;
 import 'package:jimoney_frontend/DataBase/ledger.dart';
 
 class DataService {
-  Future<List<Ledger>?> fetchDatas(int userId, String ledger_name) async {
-    final String baseUrl = 'http://54.179.125.22:5000';
+  final String baseUrl = 'http://54.179.125.22:5000';
+
+  Future<List<Ledger>?> fetchDatas(int userId, String ledgerName) async {
     final url = Uri.parse(
-        "$baseUrl/data/get_ledger_datas?user_id=$userId&ledger_name=$ledger_name");
-    //print("FUCK");
+        "$baseUrl/data/get_ledger_datas?user_id=$userId&ledger_name=$ledgerName");
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        //print(response.body[0]);
-        //print("STOP3");
         List<dynamic> jsonResponse = jsonDecode(response.body);
-        //print("STOP4");
         return jsonResponse.map((data) => Ledger.fromJson(data)).toList();
       } else {
-        // print("DEADASFUCK");
+        print("Failed to fetch data. Status code: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        return null;
       }
     } catch (e) {
-      //print("DEAD");
-      print("Error: $e");
-      return [];
+      print("Error fetching data: $e");
+      return null;
     }
   }
 }
