@@ -16,21 +16,6 @@ class ListOutput extends StatefulWidget {
 class _ListOutputState extends State<ListOutput> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
 
-  int? userId;
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print("userID = " + userId.toString());
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
-  }
-
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
