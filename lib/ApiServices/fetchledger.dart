@@ -11,14 +11,10 @@ class LedgerService {
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
 
-        // print(response.body);
-        // print("STOP1");
+        print(response.body);
         print(data.map((item) => item[0].toString()).toList());
-        // print("STOP2");
         return data.map((item) => item[0].toString()).toList();
-      } else {
-        // print("DEADASFUCK");
-      }
+      } else {}
     } catch (e) {
       //print("DEAD");
       print("Error: $e");

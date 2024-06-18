@@ -35,16 +35,15 @@ class _ListOutputState extends State<ListOutput> {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
     print("ERRORCHECKKLL2");
+    print("userid:" + userInfo.uid.toString());
+    print("userselectedledger:" + userInfo.selectedledger.toString());
     try {
-      if (userId == null) {
-        await _fetchUserId();
-      }
       setState(() {
         userInfo.ledgerResponse = [];
       });
 
-      userInfo.ledgerResponse =
-          (await dataService.fetchDatas(userId!, userInfo.selectedledger))!;
+      userInfo.ledgerResponse = (await dataService.fetchDatas(
+          userInfo.uid!, userInfo.selectedledger))!;
 
       _sum();
 
@@ -52,7 +51,7 @@ class _ListOutputState extends State<ListOutput> {
       // userId
       // Now you can use the userId as needed
     } catch (e) {
-      print("Error fetching ledger: $e");
+      print("Errorrrrr fetching ledger: $e");
       // return null;
     }
   }

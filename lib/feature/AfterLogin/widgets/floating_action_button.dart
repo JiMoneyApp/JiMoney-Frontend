@@ -17,7 +17,9 @@ class _FloatingActionButtonExampleState
         GetIt.instance<DataUpdateService>();
     final UserInfo userInfo = GetIt.instance<UserInfo>();
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    String formattedDate = DateFormat('yyyyMMdd').format(now);
+    print("Format" + formattedDate);
+    print("Insert ledger:" + userInfo.selectedledger);
     try {
       dataUpdateService.insert_new_data(
           userInfo.uid!,
@@ -79,7 +81,7 @@ class _FloatingActionButtonExampleState
                         return null;
                       },
                       onSaved: (value) {
-                        inputedDataPrice = value as int;
+                        inputedDataPrice = int.tryParse(value!);
                       },
                     ),
                     TextFormField(
