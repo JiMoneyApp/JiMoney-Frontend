@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
-import 'package:jimoney_frontend/ApiServices/fetchuser.dart';
 import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
+import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class ListOutput extends StatefulWidget {
@@ -16,21 +18,6 @@ class ListOutput extends StatefulWidget {
 class _ListOutputState extends State<ListOutput> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
 
-  int? userId;
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print("userID = " + userId.toString());
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
-  }
-
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
@@ -41,10 +28,9 @@ class _ListOutputState extends State<ListOutput> {
       setState(() {
         userInfo.ledgerResponse = [];
       });
-
       userInfo.ledgerResponse = (await dataService.fetchDatas(
           userInfo.uid!, userInfo.selectedledger))!;
-
+      BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
       _sum();
 
       print(userInfo.ledgerResponse);
@@ -77,88 +63,71 @@ class _ListOutputState extends State<ListOutput> {
     print(sum);
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Container(
-  //       width: double.maxFinite,
-  //       decoration: BoxDecoration(
-  //           shape: BoxShape.rectangle,
-  //           borderRadius: BorderRadius.only(
-  //               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-  //           border: Border.all(color: Colors.grey)),
-  //       child: ListView.builder(
-  //         itemCount: ledgerResponse.length,
-  //         itemBuilder: (context, index) {
-  //           return Container(
-  //             color: Color(0XFFFFD9D9),
-  //             child: ListTile(
-  //               leading: CircleAvatar(
-  //                 child: Icon(Icons.account_balance_wallet),
-  //               ),
-  //               title: Text(ledgerResponse[index].dname ?? 'No Name'),
-  //               subtitle: Text(ledgerResponse[index].ddate ?? 'No Date'),
-  //               trailing:
-  //                   Text(ledgerResponse[index].price.toString() ?? 'No Amount'),
-  //               onTap: () {
-  //                 print('You tapped on ${ledgerResponse[index].dname}');
-  //               },
-  //             ),
-  //           );
-  //         },
-  //         scrollDirection: Axis.vertical,
-  //       ),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<void>(
-          future: _fetchDatas(),
-          builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              List<Ledger> ledgerList = userInfo.ledgerResponse;
-              return Container(
-                width: double.maxFinite,
-                //height: double.maxFinite,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  //border: Border.all(color: Colors.grey)
-                ),
-                child: ListView.builder(
-                  itemCount: ledgerList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Color(0XFFFFD9D9),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          child: Icon(Icons.account_balance_wallet),
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<LedgerBloc, LedgerState>(
+              listener: (context, state) async {
+                if (state is LedgerInitial ||
+                    state is LedgerSelectedState ||
+                    state is LedgerDeletedState) {
+                  print("AWAIT FETCH DATAS");
+                  await _fetchDatas();
+                }
+              },
+            ),
+            BlocListener<DataBloc, DataState>(
+              listener: (context, state) async {
+                if (state is DataInsertState) {
+                  print("AWAIT FETCH DATAS");
+                  await _fetchDatas();
+                }
+              },
+            ),
+          ],
+          child: BlocBuilder<DataBloc, DataState>(
+            builder: (context, state) {
+              if (state is DataFetchedState) {
+                List<Ledger> ledgerList = userInfo.ledgerResponse;
+                print("LEDGER");
+                return Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                  ),
+                  child: ListView.builder(
+                    itemCount: ledgerList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Color(0XFFFFD9D9),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            child: Icon(Icons.account_balance_wallet),
+                          ),
+                          title: Text(ledgerList[index].dname ?? 'No Name'),
+                          subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
+                          trailing: Text(ledgerList[index].price?.toString() ??
+                              'No Amount'),
+                          onTap: () {
+                            print('You tapped on ${ledgerList[index].dname}');
+                          },
                         ),
-                        title: Text(ledgerList[index].dname ?? 'No Name'),
-                        subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
-                        trailing: Text(
-                            ledgerList[index].price.toString() ?? 'No Amount'),
-                        onTap: () {
-                          print('You tapped on ${ledgerList[index].dname}');
-                        },
-                      ),
-                    );
-                  },
-                  scrollDirection: Axis.vertical,
-                ),
-              );
-            }
-          },
+                      );
+                    },
+                    scrollDirection: Axis.vertical,
+                  ),
+                );
+              } else {
+                return Container(child: CircularProgressIndicator());
+              }
+            },
+          ),
         ),
       ),
     );

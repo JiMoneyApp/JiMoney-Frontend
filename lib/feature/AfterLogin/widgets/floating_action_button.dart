@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/updatedata.dart';
+import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:intl/intl.dart';
 
@@ -28,6 +31,7 @@ class _FloatingActionButtonExampleState
           inputedDataName!,
           inputedDataCategory!,
           formattedDate);
+      BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
       print("Inserting Success");
     } catch (e) {
       print("ERORR inserting data: $e");
@@ -73,6 +77,7 @@ class _FloatingActionButtonExampleState
                       },
                     ),
                     TextFormField(
+                      initialValue: 'Data Name',
                       decoration: InputDecoration(labelText: 'Price'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -125,50 +130,24 @@ class _FloatingActionButtonExampleState
   Widget build(BuildContext context) {
     return Container(
       height: 55,
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add, color: Colors.white, size: 30),
-          onPressed: () {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 200,
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                            onPressed: () => _showInputForm(context),
-                            child: Text(
-                              "收入",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                        TextButton(
-                          onPressed: () => _showInputForm(context),
-                          child: Text(
-                            "支出",
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                });
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: Color.fromARGB(255, 244, 138, 182),
-        ),
+      child: SpeedDial(
+        icon: Icons.add,
+        activeIcon: Icons.close,
+        backgroundColor: Color.fromARGB(255, 244, 138, 182),
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.arrow_downward, color: Colors.white, size: 30),
+            backgroundColor: Colors.red,
+            label: '支出',
+            onTap: () => _showInputForm(context),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.arrow_upward, color: Colors.white, size: 30),
+            backgroundColor: Colors.green,
+            label: '收入',
+            onTap: () => _showInputForm(context),
+          ),
+        ],
       ),
     );
   }

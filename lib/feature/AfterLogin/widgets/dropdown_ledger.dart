@@ -263,14 +263,18 @@ class _LedgerSelectorState extends State<LedgerSelector> {
     return Center(
       child: BlocBuilder<LedgerBloc, LedgerState>(
         builder: (context, state) {
+          final selectedLedger = userInfo.ledger.isNotEmpty
+              ? userInfo.selectedledger = userInfo.ledger[0]
+              : 'No Ledger';
+
           return ElevatedButton(
               onPressed: () {
                 _showLedgerSelectorDialog(context);
               },
               child: Text(
                 state is LedgerInitial
-                    ? '${userInfo.selectedledger = userInfo.ledger[0]}'
-                    : '${userInfo.selectedledger}',
+                    ? selectedLedger
+                    : userInfo.selectedledger,
                 style: TextStyle(color: Colors.black),
               ));
         },

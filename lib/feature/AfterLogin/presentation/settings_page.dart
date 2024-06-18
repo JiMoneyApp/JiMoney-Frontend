@@ -21,25 +21,10 @@ class _SettingsPageState extends State<SettingsPage> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
   final UserUpdateService userUpdateService =
       GetIt.instance<UserUpdateService>();
-  int? userId = null;
+
   @override
   void initState() {
     super.initState();
-    _fetchUserId();
-  }
-
-  Future<void> _fetchUserId() async {
-    final UserService userService = GetIt.instance<UserService>();
-    try {
-      userId =
-          await userService.fetchUserId(userInfo.username, userInfo.password);
-      print(userId);
-      // userId;
-      // Now you can use the userId as needed
-    } catch (e) {
-      print("Error fetching user ID: $e");
-      // return null;
-    }
   }
 
   @override
@@ -262,7 +247,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (_formKey.currentState?.validate() ?? false) {
                   setState(() {
                     userUpdateService.updateUserbudget(
-                        userId!, int.parse(_budgetController.text));
+                        userInfo.uid!, int.parse(_budgetController.text));
                     userInfo.budget = int.parse(_budgetController.text);
                   });
                   Navigator.of(context).pop(); // Close the dialog
@@ -314,7 +299,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (_formKey.currentState?.validate() ?? false) {
                   setState(() {
                     userUpdateService.updateUsernickname(
-                        userId!, _nicknameController.text);
+                        userInfo.uid!, _nicknameController.text);
                     userInfo.nickname = _nicknameController.text;
                   });
                   Navigator.of(context).pop(); // Close the dialog
@@ -366,7 +351,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (_formKey.currentState?.validate() ?? false) {
                   setState(() {
                     userUpdateService.updateUsernickname(
-                        userId!, _passwordController.text);
+                        userInfo.uid!, _passwordController.text);
                     userInfo.password = _passwordController.text;
                   });
                   Navigator.of(context).pop(); // Close the dialog
