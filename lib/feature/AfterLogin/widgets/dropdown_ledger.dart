@@ -28,7 +28,6 @@ class _LedgerSelectorState extends State<LedgerSelector> {
       isLoading = true;
     });
     final ledgerService = GetIt.instance<LedgerService>();
-    print("uid:" + userInfo.uid.toString());
     try {
       userInfo.ledger = (await ledgerService.fetchLedgersName(userInfo.uid!))!;
       print("SSSSelected Ledger = " + userInfo.ledger[0]);
