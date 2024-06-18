@@ -12,11 +12,6 @@ class BottomNavigationBloc
       emit(HomeScreenState());
     });
 
-    on<NavigateToAnalyticsEvent>((event, emit) {
-      print("Analytics event");
-      emit(AnalyticsScreenState());
-    });
-
     on<NavigateToSettingsEvent>((event, emit) {
       print("Settings event");
       emit(SettingsScreenState());

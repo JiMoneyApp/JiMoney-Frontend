@@ -6,10 +6,8 @@ import 'package:jimoney_frontend/feature/AfterLogin/widgets/budget_display.dart'
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/dropdown_ledger.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/encouragement.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/floating_action_button.dart';
-import 'package:jimoney_frontend/feature/AfterLogin/widgets/ledger_delete_button.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/list_output.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/total_cost.dart';
-import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
 import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,15 +82,6 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.only(top: 15),
                             child: LedgerSelector(),
                           ),
-                          Container(
-                            width: 100,
-                            height: 50,
-                            child: BlocBuilder<LedgerBloc, LedgerState>(
-                              builder: (context, state) {
-                                return LedgerDeleteButton();
-                              },
-                            ),
-                          )
                         ],
                       ),
                       SizedBox(height: 10),

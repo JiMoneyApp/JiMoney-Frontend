@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
-import 'package:jimoney_frontend/feature/AfterLogin/presentation/analytics_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.dart';
 import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
 import 'package:jimoney_frontend/routing/bloc/bottom_navigation_bloc.dart';
@@ -28,8 +27,6 @@ class _MainScreenState extends State<MainPage> {
           builder: (context, state) {
             if (state is HomeScreenState) {
               return HomePage();
-            } else if (state is AnalyticsScreenState) {
-              return AnalyticsPage();
             } else if (state is SettingsScreenState) {
               return SettingsPage();
             } else {

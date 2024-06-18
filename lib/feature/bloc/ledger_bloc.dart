@@ -12,6 +12,7 @@ class LedgerBloc extends Bloc<LedgerEvent, LedgerState> {
     print(state);
     on<LedgerSelectedEvent>(_onLedgerChanged);
     on<LedgerAddedEvent>(_onLedgerAdded);
+    on<LedgerDeletedEvent>(_onLedgerDeleted);
   }
   void _onLedgerChanged(LedgerSelectedEvent event, Emitter<LedgerState> emit) {
     print("LedgerSelectedEvent triggered");
@@ -24,11 +25,13 @@ class LedgerBloc extends Bloc<LedgerEvent, LedgerState> {
   void _onLedgerAdded(LedgerAddedEvent event, Emitter<LedgerState> emit) {
     print("LedgerAddedEvent triggered");
     print(state);
+    emit(LedgerAddedState());
   }
 
   void _onLedgerDeleted(LedgerDeletedEvent event, Emitter<LedgerState> emit) {
     print("LedgerDeletedEvent triggered");
     print(state);
+    userInfo.selectedledger = event.deletedLedger;
     emit(LedgerDeletedState(deletedLedger: event.deletedLedger));
   }
 }
