@@ -62,6 +62,7 @@ class _FloatingActionButtonExampleState
     String formattedDate = DateFormat('yyyyMMdd').format(now);
     print("Format" + formattedDate);
     print("Insert ledger:" + userInfo.selectedledger);
+    print("inputDataPrice:" + inputedDataPrice.toString());
     try {
       dataUpdateService.insert_new_data(
         userInfo.uid!,
@@ -223,7 +224,7 @@ class _FloatingActionButtonExampleState
                           child: TextFormField(
                             controller: dateController,
                             decoration: InputDecoration(
-                              labelText: 'DD/MM/YYYY',
+                              labelText: 'YYYY/MM/DD',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
@@ -243,7 +244,7 @@ class _FloatingActionButtonExampleState
                               );
                               if (pickedDate != null) {
                                 String formattedDate =
-                                    DateFormat('dd/MM/yyyy').format(pickedDate);
+                                    DateFormat('yyyyMMdd').format(pickedDate);
                                 setState(() {
                                   dateController.text = formattedDate;
                                   inputedDataDate = formattedDate;

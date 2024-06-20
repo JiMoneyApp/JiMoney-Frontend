@@ -8,9 +8,9 @@ class DataUpdateService {
   Future<void> insert_new_data(int userId, int price, String dname,
       String dtype, String ddate, int? lid, int? gid) async {
     final url = Uri.parse(
-        "$baseUrl/data/insert_new_data?user_id=$userId&price=$price&dname=$dname&dtype=$dtype&ddate=$ddate&lid=$lid&gid=$gid");
+        "$baseUrl/data/insert_data?user_id=$userId&price=$price&dname=$dname&dtype=$dtype&ddate=$ddate&lid=$lid&gid=$gid");
     try {
-      final response = await http.put(
+      final response = await http.post(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
@@ -29,6 +29,13 @@ class DataUpdateService {
         print('Insert Data:$dname Successfully');
         print("Response body: ${response.body}");
       } else {
+        print("userId: $userId");
+        print("Price: $price");
+        print("Dname: $dname");
+        print("Dtype: $dtype");
+        print("Ddate: $ddate");
+        print("Lid: $lid");
+        print("Gid: $gid");
         print("Failed to insert data into userId = $userId");
         print("Response body: ${response.body}");
       }
