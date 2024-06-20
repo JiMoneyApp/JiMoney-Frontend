@@ -55,7 +55,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
   Future<void> _deleteLedger(String ledgerName) async {
     final ledgerService = GetIt.instance<LedgerUpdateService>();
     try {
-      await ledgerService.deleteLedger(userInfo.uid!, ledgerName);
+      await ledgerService.deleteLedger(0);
       await _fetchLedger();
       BlocProvider.of<LedgerBloc>(context).add(LedgerDeletedEvent(ledgerName));
       print("Deleting ledger: $ledgerName");

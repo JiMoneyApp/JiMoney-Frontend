@@ -5,13 +5,15 @@ import 'package:jimoney_frontend/DataBase/ledger.dart';
 class DataService {
   final String baseUrl = 'http://54.179.125.22:5000';
 
-  Future<List<Ledger>?> fetchDatas(int userId, String ledgerName) async {
-    final url = Uri.parse(
-        "$baseUrl/data/get_ledger_datas?user_id=$userId&ledger_name=$ledgerName");
+  Future<List<Ledger>?> fetchDatas(int userId) async {
+    final url = Uri.parse("$baseUrl/data/get_all_datas?user_id=$userId");
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
+        print("fetchdddddd");
+        print(jsonResponse.map((data) => Ledger.fromJson(data)).toList());
+        print("ffffetch");
         return jsonResponse.map((data) => Ledger.fromJson(data)).toList();
       } else {
         print("Failed to fetch data. Status code: ${response.statusCode}");

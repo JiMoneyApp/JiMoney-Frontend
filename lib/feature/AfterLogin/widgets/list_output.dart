@@ -31,19 +31,20 @@ class _ListOutputState extends State<ListOutput> {
       //     userInfo.uid!, userInfo.selectedledger))!;
       // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
       // _sum();
-      var fetchedData =
-          await dataService.fetchDatas(userInfo.uid!, userInfo.selectedledger);
+      var fetchedData = await dataService.fetchDatas(userInfo.uid!);
       userInfo.ledgerResponse = fetchedData!;
       // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
       // if (fetchedData != null && fetchedData.isNotEmpty) {
       //   userInfo.ledgerResponse = fetchedData;
 
       //   BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
-      //   _sum();
+      _sum();
       // } else {
       //   print("No data fetched or empty data received.");
       // }
-      print("LedgerResponse");
+      print("LEDGERResponse");
+      //print(fetchedData);
+      print("UL");
       print(userInfo.ledgerResponse);
       // userId
       // Now you can use the userId as needed

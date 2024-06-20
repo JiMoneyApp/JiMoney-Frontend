@@ -33,8 +33,7 @@ class _FloatingActionButtonExampleState
       //     userInfo.uid!, userInfo.selectedledger))!;
       // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
       // _sum();
-      var fetchedData =
-          await dataService.fetchDatas(userInfo.uid!, userInfo.selectedledger);
+      var fetchedData = await dataService.fetchDatas(userInfo.uid!);
 
       if (fetchedData != null && fetchedData.isNotEmpty) {
         setState(() {
@@ -65,12 +64,14 @@ class _FloatingActionButtonExampleState
     print("Insert ledger:" + userInfo.selectedledger);
     try {
       dataUpdateService.insert_new_data(
-          userInfo.uid!,
-          userInfo.selectedledger,
-          inputedDataPrice!,
-          inputedDataName!,
-          inputedDataCategory!,
-          inputedDataDate!);
+        userInfo.uid!,
+        inputedDataPrice!,
+        inputedDataName!,
+        inputedDataCategory!,
+        inputedDataDate!,
+        null,
+        null,
+      );
       await _fetchDatas();
       BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
       print("Inserting Success");
