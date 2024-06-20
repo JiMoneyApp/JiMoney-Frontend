@@ -1,6 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/updatedata.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/categorydialog.dart';
+import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:intl/intl.dart';
 
@@ -12,12 +18,52 @@ class FloatingActionButtonExample extends StatefulWidget {
 
 class _FloatingActionButtonExampleState
     extends State<FloatingActionButtonExample> {
+  final UserInfo userInfo = GetIt.instance<UserInfo>();
+  final Category category = GetIt.instance<Category>();
+  Future<void> _fetchDatas() async {
+    //print("ERRORCHECCK1");
+    final DataService dataService = GetIt.instance<DataService>();
+    print("ERRORCHECKKLL2");
+    print("userid:" + userInfo.uid.toString());
+    print("userselectedledger:" + userInfo.selectedledger.toString());
+    try {
+      setState(() {
+        userInfo.ledgerResponse = [];
+      });
+      // userInfo.ledgerResponse = (await dataService.fetchDatas(
+      //     userInfo.uid!, userInfo.selectedledger))!;
+      // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
+      // _sum();
+      var fetchedData =
+          await dataService.fetchDatas(userInfo.uid!, userInfo.selectedledger);
+
+      if (fetchedData != null && fetchedData.isNotEmpty) {
+        setState(() {
+          userInfo.ledgerResponse = fetchedData;
+        });
+
+        BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
+      } else {
+        print("No data fetched or empty data received.");
+      }
+      print("LedgerResponse");
+      print(userInfo.ledgerResponse);
+      // userId
+      // Now you can use the userId as needed
+    } catch (e) {
+      print("Errorrrrr fetching ledger: $e");
+      // return null;
+    }
+  }
+
   Future<void> _insertData() async {
     final DataUpdateService dataUpdateService =
         GetIt.instance<DataUpdateService>();
     final UserInfo userInfo = GetIt.instance<UserInfo>();
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    String formattedDate = DateFormat('yyyyMMdd').format(now);
+    print("Format" + formattedDate);
+    print("Insert ledger:" + userInfo.selectedledger);
     try {
       dataUpdateService.insert_new_data(
           userInfo.uid!,
@@ -25,10 +71,12 @@ class _FloatingActionButtonExampleState
           inputedDataPrice!,
           inputedDataName!,
           inputedDataCategory!,
-          formattedDate);
+          inputedDataDate!);
+      await _fetchDatas();
+      BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
       print("Inserting Success");
     } catch (e) {
-      print("Error inserting data: $e");
+      print("ERORR inserting data: $e");
     }
   }
 
@@ -36,6 +84,9 @@ class _FloatingActionButtonExampleState
   String? inputedDataName;
   int? inputedDataPrice;
   String? inputedDataCategory;
+  String? inputedDataDate;
+
+  TextEditingController dateController = TextEditingController();
 
   void _showInputForm(BuildContext context) {
     showModalBottomSheet(
@@ -43,7 +94,7 @@ class _FloatingActionButtonExampleState
       isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
-          height: 450,
+          height: 550, // Increased height to accommodate additional widgets
           width: 450,
           child: Padding(
             padding: EdgeInsets.only(
@@ -58,44 +109,170 @@ class _FloatingActionButtonExampleState
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Data Name'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        inputedDataName = value;
-                      },
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.pink, // Background color
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.wallet_giftcard,
+                                color: Colors.white),
+                            onPressed: () {
+                              // Open Ledger Selection Dialog
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'Name of the purchase',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              inputedDataName = value;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Price'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the price';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        inputedDataPrice = value as int;
-                      },
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.pink, // Background color
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(Icons.attach_money, color: Colors.white),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Price',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the price';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              inputedDataPrice = int.tryParse(value!)?.abs();
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Category'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the Category';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        inputedDataCategory = value;
-                      },
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.pink, // Background color
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.category, color: Colors.white),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CategoryDialog(
+                                    onCategorySelected: (String category) {
+                                      setState(() {
+                                        inputedDataCategory = category;
+                                      });
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: TextFormField(
+                            controller: dateController,
+                            decoration: InputDecoration(
+                              labelText: 'DD/MM/YYYY',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
+                            ),
+                            readOnly: true,
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2101),
+                              );
+                              if (pickedDate != null) {
+                                String formattedDate =
+                                    DateFormat('dd/MM/yyyy').format(pickedDate);
+                                setState(() {
+                                  dateController.text = formattedDate;
+                                  inputedDataDate = formattedDate;
+                                });
+                              }
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a date';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              inputedDataDate = value;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 20),
                     ElevatedButton(
-                      child: Text('Submit'),
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0), // 調整內邊距來增大按鈕
+                        child: Text(
+                          'Done',
+                          style: TextStyle(
+                              fontSize: 20.0, color: Colors.white), // 調整文字大小
+                        ),
+                      ),
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           _formKey.currentState?.save();
@@ -103,11 +280,17 @@ class _FloatingActionButtonExampleState
                           _insertData();
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content: Text(
-                                    'DataName: $inputedDataName, DataPrice: $inputedDataPrice, DataCategory: $inputedDataCategory')),
+                              content: Text(
+                                'DataName: $inputedDataName, DataPrice: $inputedDataPrice, DataCategory: $inputedDataCategory, DataDate: $inputedDataDate',
+                              ),
+                            ),
                           );
                         }
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pink,
+                        shape: CircleBorder(),
+                      ),
                     ),
                   ],
                 ),
@@ -123,50 +306,24 @@ class _FloatingActionButtonExampleState
   Widget build(BuildContext context) {
     return Container(
       height: 55,
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add, color: Colors.white, size: 30),
-          onPressed: () {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 200,
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                            onPressed: () => _showInputForm(context),
-                            child: Text(
-                              "收入",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                        TextButton(
-                          onPressed: () => _showInputForm(context),
-                          child: Text(
-                            "支出",
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                });
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: Color.fromARGB(255, 244, 138, 182),
-        ),
+      child: SpeedDial(
+        icon: Icons.add,
+        activeIcon: Icons.close,
+        backgroundColor: Color.fromARGB(255, 244, 138, 182),
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.arrow_downward, color: Colors.white, size: 30),
+            backgroundColor: Colors.red,
+            label: '支出',
+            onTap: () => _showInputForm(context),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.arrow_upward, color: Colors.white, size: 30),
+            backgroundColor: Colors.green,
+            label: '收入',
+            onTap: () => _showInputForm(context),
+          ),
+        ],
       ),
     );
   }

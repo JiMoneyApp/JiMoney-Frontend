@@ -22,7 +22,9 @@ class Ledger {
     dname = json['dname'];
     dtype = json['dtype'];
     lname = json['lname'];
-    price = json['price'];
+    price = json['price'] is int
+        ? json['price']
+        : int.tryParse(json['price'] ?? '0'); // 处理 price 字段
     uid = json['uid'];
   }
 
@@ -51,7 +53,9 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    cost = json['cost'];
+    cost = json['cost'] is int
+        ? json['cost']
+        : int.tryParse(json['cost'] ?? '0'); // 处理 cost 字段
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
