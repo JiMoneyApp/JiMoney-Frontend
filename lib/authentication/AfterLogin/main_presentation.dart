@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jimoney_frontend/authentication/presentation/login_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/home_page.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/presentation/settings_page.dart';
 import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
@@ -34,7 +35,8 @@ class _MainScreenState extends State<MainPage> {
             } else if (state is SettingsScreenState) {
               return SettingsPage();
             } else {
-              return HomePage();
+              return LoginPage();
+              // return HomePage();
             }
           },
         ),

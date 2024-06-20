@@ -25,14 +25,25 @@ class _ListOutputState extends State<ListOutput> {
     print("userid:" + userInfo.uid.toString());
     print("userselectedledger:" + userInfo.selectedledger.toString());
     try {
-      setState(() {
-        userInfo.ledgerResponse = [];
-      });
-      userInfo.ledgerResponse = (await dataService.fetchDatas(
-          userInfo.uid!, userInfo.selectedledger))!;
-      BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
-      _sum();
+      userInfo.ledgerResponse = [];
 
+      // userInfo.ledgerResponse = (await dataService.fetchDatas(
+      //     userInfo.uid!, userInfo.selectedledger))!;
+      // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
+      // _sum();
+      var fetchedData =
+          await dataService.fetchDatas(userInfo.uid!, userInfo.selectedledger);
+      userInfo.ledgerResponse = fetchedData!;
+      // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
+      // if (fetchedData != null && fetchedData.isNotEmpty) {
+      //   userInfo.ledgerResponse = fetchedData;
+
+      //   BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
+      //   _sum();
+      // } else {
+      //   print("No data fetched or empty data received.");
+      // }
+      print("LedgerResponse");
       print(userInfo.ledgerResponse);
       // userId
       // Now you can use the userId as needed
@@ -45,6 +56,7 @@ class _ListOutputState extends State<ListOutput> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<DataBloc>(context).add(DataBeginEvent());
     _fetchDatas();
   }
 
@@ -69,27 +81,32 @@ class _ListOutputState extends State<ListOutput> {
       body: Center(
         child: MultiBlocListener(
           listeners: [
-            BlocListener<LedgerBloc, LedgerState>(
+            BlocListener<DataBloc, DataState>(
               listener: (context, state) async {
-                if (state is LedgerInitial ||
-                    state is LedgerSelectedState ||
-                    state is LedgerDeletedState) {
-                  print("AWAIT FETCH DATAS");
+                print("DSTATE: " + state.toString());
+                if (state is DataBeginState || state is DataInsertState) {
+                  print("Data AWAIT FETCH DATAS");
+
                   await _fetchDatas();
+                  print("Fetched Datas");
+                  BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
                 }
               },
             ),
-            BlocListener<DataBloc, DataState>(
+            BlocListener<LedgerBloc, LedgerState>(
               listener: (context, state) async {
-                if (state is DataInsertState) {
-                  print("AWAIT FETCH DATAS");
+                print("LSTATE: " + state.toString());
+                if (state is LedgerInitial || state is LedgerSelectedState) {
+                  print("Ledger AWAIT FETCH DATAS");
                   await _fetchDatas();
+                  BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
                 }
               },
             ),
           ],
           child: BlocBuilder<DataBloc, DataState>(
             builder: (context, state) {
+              print("State: " + state.toString());
               if (state is DataFetchedState) {
                 List<Ledger> ledgerList = userInfo.ledgerResponse;
                 print("LEDGER");
@@ -112,8 +129,8 @@ class _ListOutputState extends State<ListOutput> {
                           ),
                           title: Text(ledgerList[index].dname ?? 'No Name'),
                           subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
-                          trailing: Text(ledgerList[index].price?.toString() ??
-                              'No Amount'),
+                          trailing: Text(
+                              '\$${ledgerList[index].price?.toString() ?? 'No Amount'}'),
                           onTap: () {
                             print('You tapped on ${ledgerList[index].dname}');
                           },
