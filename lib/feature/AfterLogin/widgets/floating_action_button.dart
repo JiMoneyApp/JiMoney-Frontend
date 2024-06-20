@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -18,6 +19,7 @@ class FloatingActionButtonExample extends StatefulWidget {
 class _FloatingActionButtonExampleState
     extends State<FloatingActionButtonExample> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
+  final Category category = GetIt.instance<Category>();
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
