@@ -11,3 +11,19 @@ class Ledger {
     );
   }
 }
+
+class LedgerByWallet {
+  int lid;
+  int wid;
+  String name;
+
+  LedgerByWallet({required this.lid, required this.wid, required this.name});
+
+  factory LedgerByWallet.fromJson(Map<String, dynamic> json) {
+    return LedgerByWallet(
+      lid: json['LID'],
+      wid: json['WID'],
+      name: json['LName'],
+    );
+  }
+}

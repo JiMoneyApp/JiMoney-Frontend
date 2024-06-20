@@ -6,9 +6,12 @@ import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/updatedata.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/categorydialog.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/walletdialog.dart';
 import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:intl/intl.dart';
+import 'package:jimoney_frontend/feature/common/wallet.dart';
 
 class FloatingActionButtonExample extends StatefulWidget {
   @override
@@ -58,6 +61,7 @@ class _FloatingActionButtonExampleState
     final DataUpdateService dataUpdateService =
         GetIt.instance<DataUpdateService>();
     final UserInfo userInfo = GetIt.instance<UserInfo>();
+    final LedgerByWallet ledgerByWallet = GetIt.instance<LedgerByWallet>();
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyyMMdd').format(now);
     print("Format" + formattedDate);
@@ -70,8 +74,8 @@ class _FloatingActionButtonExampleState
         inputedDataName!,
         inputedDataCategory!,
         inputedDataDate!,
-        null,
-        null,
+        ledgerByWallet.wid,
+        ledgerByWallet.lid,
       );
       await _fetchDatas();
       BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
@@ -86,6 +90,8 @@ class _FloatingActionButtonExampleState
   int? inputedDataPrice;
   String? inputedDataCategory;
   String? inputedDataDate;
+  String? inputedWallet;
+  String? inputedLedger;
 
   TextEditingController dateController = TextEditingController();
 
@@ -110,6 +116,21 @@ class _FloatingActionButtonExampleState
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Wallet: ${userInfo.inputedWallet}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'Ledger: ${userInfo.inputedLedger}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                     Row(
                       children: [
                         Container(
@@ -122,6 +143,18 @@ class _FloatingActionButtonExampleState
                             icon: Icon(Icons.wallet_giftcard,
                                 color: Colors.white),
                             onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return WalletDialog(
+                                    onCategorySelected: (Wallet wallet) {
+                                      setState(() {
+                                        userInfo.inputedWallet = wallet.name;
+                                      });
+                                    },
+                                  );
+                                },
+                              );
                               // Open Ledger Selection Dialog
                             },
                           ),

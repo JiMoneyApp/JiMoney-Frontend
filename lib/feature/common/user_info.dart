@@ -1,5 +1,6 @@
 import 'package:jimoney_frontend/DataBase/datas.dart';
 import 'package:jimoney_frontend/feature/common/ledger.dart';
+import 'package:jimoney_frontend/feature/common/wallet.dart';
 
 class UserInfo {
   String username;
@@ -11,7 +12,10 @@ class UserInfo {
   String noticetime = "";
   List<Ledger> ledger = [];
   String selectedledger = "";
+  String inputedWallet = "";
+  String inputedLedger = "";
   List<Datas> ledgerResponse;
+  List<Wallet> wallet = [];
   int sum;
   int? uid;
 

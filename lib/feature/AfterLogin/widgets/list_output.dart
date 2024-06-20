@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
+import 'package:jimoney_frontend/ApiServices/fetchwallet.dart';
 import 'package:jimoney_frontend/DataBase/datas.dart';
 import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
 import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
@@ -17,6 +18,16 @@ class ListOutput extends StatefulWidget {
 
 class _ListOutputState extends State<ListOutput> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
+
+  Future<void> _fetchwallets() async {
+    final WalletService walletService = GetIt.instance<WalletService>();
+    try {
+      userInfo.wallet = (await walletService.fetchAllWallets(userInfo.uid!));
+      print("${userInfo.wallet}");
+    } catch (e) {
+      print("Error fetching wallet: $e");
+    }
+  }
 
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
@@ -59,6 +70,7 @@ class _ListOutputState extends State<ListOutput> {
     super.initState();
     BlocProvider.of<DataBloc>(context).add(DataBeginEvent());
     _fetchDatas();
+    _fetchwallets();
   }
 
   @override

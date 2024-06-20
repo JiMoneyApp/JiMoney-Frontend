@@ -6,7 +6,7 @@ import 'package:jimoney_frontend/feature/common/ledger.dart';
 class LedgerService {
   final String baseUrl = 'http://54.179.125.22:5000';
 
-  Future<List<String>?> fetchLedgersName(int wallet_id) async {
+  Future<List<LedgerByWallet>?> fetchAllLedgersbyWallet(int wallet_id) async {
     final String baseUrl = 'http://54.179.125.22:5000';
     final url = Uri.parse("$baseUrl/ledger/get_ledgers?wallet_id=$wallet_id");
 
@@ -17,7 +17,7 @@ class LedgerService {
 
         print(response.body);
         print(data.map((item) => item[0].toString()).toList());
-        return data.map((item) => item[0].toString()).toList();
+        return data.map((json) => LedgerByWallet.fromJson(json)).toList();
       } else {}
     } catch (e) {
       //print("DEAD");
