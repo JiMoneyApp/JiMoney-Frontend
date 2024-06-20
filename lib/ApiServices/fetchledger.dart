@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
 
 class LedgerService {
   final String baseUrl = 'http://54.179.125.22:5000';
@@ -113,19 +114,22 @@ class LedgerService {
     }
   }
 
-  Future<dynamic> fetchAllLedgers(int user_id) async {
-    final url = Uri.parse("$baseUrl/ledger/get_all_ledgers?user_id=$user_id");
+  Future<List<Ledger>> fetchAllLedgers(int userId) async {
+    final url = Uri.parse("$baseUrl/ledger/get_all_ledgers?user_id=$userId");
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         print('FetchAllLedgers Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
-        return jsonDecode(response.body);
+        List<dynamic> data = jsonDecode(response.body);
+        return data.map((json) => Ledger.fromJson(json)).toList();
       } else {
         print("Failed to load data");
+        return [];
       }
     } catch (e) {
       print("Error: $e");
+      return [];
     }
   }
 }

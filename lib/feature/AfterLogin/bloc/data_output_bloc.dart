@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/feature/common/data_info.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:meta/meta.dart';
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
 part 'data_output_event.dart';
 part 'data_output_state.dart';
 

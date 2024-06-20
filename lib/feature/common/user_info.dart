@@ -1,4 +1,5 @@
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
 
 class UserInfo {
   String username;
@@ -8,7 +9,7 @@ class UserInfo {
   int budget;
   bool isdark = false;
   String noticetime = "";
-  List<String> ledger = [];
+  List<Ledger> ledger = [];
   String selectedledger = "";
   List<Datas> ledgerResponse;
   int sum;

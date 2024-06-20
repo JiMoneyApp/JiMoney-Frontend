@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchledger.dart';
 import 'package:jimoney_frontend/ApiServices/updateledger.dart';
 import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class LedgerSelector extends StatefulWidget {
@@ -196,7 +197,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                   child: DropdownButton<String>(
                     value: state is LedgerSelectedState
                         ? userInfo.selectedledger
-                        : userInfo.selectedledger = userInfo.ledger[0],
+                        : userInfo.selectedledger = userInfo.ledger[0].name,
                     hint: Text('Select Ledger'),
                     icon: Icon(Icons.arrow_drop_down),
                     iconSize: 24,
@@ -207,10 +208,10 @@ class _LedgerSelectorState extends State<LedgerSelector> {
                     dropdownColor: Colors.white,
                     onChanged: _onLedgerChanged,
                     items: [
-                      ...userInfo.ledger.map((String ledger) {
+                      ...userInfo.ledger.map((Ledger ledger) {
                         return DropdownMenuItem<String>(
-                          value: ledger,
-                          child: Text(ledger),
+                          value: ledger.name,
+                          child: Text(ledger.name),
                         );
                       }).toList(),
                       DropdownMenuItem<String>(
@@ -274,7 +275,7 @@ class _LedgerSelectorState extends State<LedgerSelector> {
               child: Text(
                 state is LedgerInitial
                     ? selectedLedger = userInfo.ledger.isNotEmpty
-                        ? userInfo.selectedledger = userInfo.ledger[0]
+                        ? userInfo.selectedledger = userInfo.ledger[0].name
                         : 'No Ledger'
                     : userInfo.selectedledger,
                 style: TextStyle(color: Colors.black),

@@ -1,4 +1,4 @@
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
 
 class DataInfo {
   int did;
