@@ -22,6 +22,7 @@ class FloatingActionButtonExample extends StatefulWidget {
 class _FloatingActionButtonExampleState
     extends State<FloatingActionButtonExample> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
+  final LedgerByWallet ledgerByWallet = GetIt.instance<LedgerByWallet>();
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
@@ -61,7 +62,7 @@ class _FloatingActionButtonExampleState
     final DataUpdateService dataUpdateService =
         GetIt.instance<DataUpdateService>();
     final UserInfo userInfo = GetIt.instance<UserInfo>();
-    final LedgerByWallet ledgerByWallet = GetIt.instance<LedgerByWallet>();
+
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyyMMdd').format(now);
     print("Format" + formattedDate);
@@ -74,8 +75,8 @@ class _FloatingActionButtonExampleState
         inputedDataName!,
         inputedDataCategory!,
         inputedDataDate!,
-        ledgerByWallet.wid,
-        ledgerByWallet.lid,
+        inputedWalletid,
+        inputedLedgerid,
       );
       await _fetchDatas();
       BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
@@ -90,8 +91,8 @@ class _FloatingActionButtonExampleState
   int? inputedDataPrice;
   String? inputedDataCategory;
   String? inputedDataDate;
-  String? inputedWallet;
-  String? inputedLedger;
+  int? inputedWalletid;
+  int? inputedLedgerid;
 
   TextEditingController dateController = TextEditingController();
 
@@ -150,6 +151,10 @@ class _FloatingActionButtonExampleState
                                     onCategorySelected: (Wallet wallet) {
                                       setState(() {
                                         userInfo.inputedWallet = wallet.name;
+                                        inputedWalletid = ledgerByWallet.lid;
+                                        inputedLedgerid = ledgerByWallet.wid;
+                                        print("WalletID: $inputedWalletid");
+                                        print("LedgerID: $inputedLedgerid");
                                       });
                                     },
                                   );
@@ -341,6 +346,7 @@ class _FloatingActionButtonExampleState
     return Container(
       height: 55,
       child: SpeedDial(
+        buttonSize: Size(40, 40),
         icon: Icons.add,
         activeIcon: Icons.close,
         backgroundColor: Color.fromARGB(255, 244, 138, 182),

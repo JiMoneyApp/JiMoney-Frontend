@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/fetchwallet.dart';
 import 'package:jimoney_frontend/DataBase/datas.dart';
 import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
 import 'package:jimoney_frontend/feature/bloc/ledger_bloc.dart';
+import 'package:jimoney_frontend/feature/common/categories.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 
 class ListOutput extends StatefulWidget {
@@ -88,9 +90,48 @@ class _ListOutputState extends State<ListOutput> {
     print(sum);
   }
 
+  void sortLedgerList() {
+    setState(() {
+      userInfo.ledgerResponse.sort((a, b) {
+        if (userInfo.isSortedByNewestFirst) {
+          return b.ddate!.compareTo(a.ddate!);
+        } else {
+          return a.ddate!.compareTo(b.ddate!);
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(36),
+        child: AppBar(
+          title: Text("$formattedDate"),
+          automaticallyImplyLeading: false,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: IconButton(
+                icon: Icon(userInfo.isSortedByNewestFirst
+                    ? Icons.arrow_downward
+                    : Icons.arrow_upward),
+                onPressed: () {
+                  setState(() {
+                    userInfo.isSortedByNewestFirst =
+                        !userInfo.isSortedByNewestFirst;
+                  });
+                  sortLedgerList();
+                },
+                iconSize: 30,
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: MultiBlocListener(
           listeners: [
@@ -134,16 +175,31 @@ class _ListOutputState extends State<ListOutput> {
                   child: ListView.builder(
                     itemCount: ledgerList.length,
                     itemBuilder: (context, index) {
+                      final category = ledgerList[index].dtype;
+                      print("category: ");
+                      print(category);
+                      final categoryItem = CategoryItem.fromName(category!);
+                      // DateFormat originalFormat = DateFormat('yyyyMMdd');
+                      // DateFormat newFormat = DateFormat('yyyy-MM-dd');
+                      // DateTime dateTime =
+                      //     DateTime.parse(ledgerList[index].ddate!);
+                      // String cardformattedDate = newFormat.format(
+                      //     originalFormat.parse(ledgerList[index].ddate!));
                       return Card(
-                        color: Color(0XFFFFD9D9),
+                        color: (category == "薪水" || category == "投資")
+                            ? Colors.green
+                            : Color(0XFFFFD9D9),
                         child: ListTile(
                           leading: CircleAvatar(
-                            child: Icon(Icons.account_balance_wallet),
+                            child: Icon(categoryItem.icon),
                           ),
                           title: Text(ledgerList[index].dname ?? 'No Name'),
                           subtitle: Text(ledgerList[index].ddate ?? 'No Date'),
                           trailing: Text(
-                              '\$${ledgerList[index].price?.toString() ?? 'No Amount'}'),
+                            '\$${ledgerList[index].price?.toString() ?? 'No Amount'}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                           onTap: () {
                             print('You tapped on ${ledgerList[index].dname}');
                           },

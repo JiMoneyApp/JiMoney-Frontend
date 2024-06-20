@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             "Cost:",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 25,
                               color: Colors.white,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             "Budget:",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 25,
                               color: Colors.white,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold,

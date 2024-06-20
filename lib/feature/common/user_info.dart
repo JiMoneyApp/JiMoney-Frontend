@@ -18,6 +18,8 @@ class UserInfo {
   List<Wallet> wallet = [];
   int sum;
   int? uid;
+  bool isSortedByNewestFirst =
+      true; // True for newest first, false for oldest first
 
   UserInfo({
     required this.username,
