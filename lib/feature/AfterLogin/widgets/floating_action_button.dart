@@ -19,7 +19,6 @@ class FloatingActionButtonExample extends StatefulWidget {
 class _FloatingActionButtonExampleState
     extends State<FloatingActionButtonExample> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
-
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
