@@ -1,4 +1,6 @@
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
+import 'package:jimoney_frontend/feature/common/wallet.dart';
 
 class UserInfo {
   String username;
@@ -8,11 +10,16 @@ class UserInfo {
   int budget;
   bool isdark = false;
   String noticetime = "";
-  List<String> ledger = [];
+  List<Ledger> ledger = [];
   String selectedledger = "";
-  List<Ledger> ledgerResponse;
+  String inputedWallet = "";
+  String inputedLedger = "";
+  List<Datas> ledgerResponse;
+  List<Wallet> wallet = [];
   int sum;
   int? uid;
+  bool isSortedByNewestFirst =
+      true; // True for newest first, false for oldest first
 
   UserInfo({
     required this.username,

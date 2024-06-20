@@ -6,9 +6,12 @@ import 'package:get_it/get_it.dart';
 import 'package:jimoney_frontend/ApiServices/fetchdata.dart';
 import 'package:jimoney_frontend/ApiServices/updatedata.dart';
 import 'package:jimoney_frontend/feature/AfterLogin/widgets/categorydialog.dart';
+import 'package:jimoney_frontend/feature/AfterLogin/widgets/walletdialog.dart';
 import 'package:jimoney_frontend/feature/bloc/bloc/data_bloc.dart';
+import 'package:jimoney_frontend/feature/common/ledger.dart';
 import 'package:jimoney_frontend/feature/common/user_info.dart';
 import 'package:intl/intl.dart';
+import 'package:jimoney_frontend/feature/common/wallet.dart';
 
 class FloatingActionButtonExample extends StatefulWidget {
   @override
@@ -19,6 +22,7 @@ class FloatingActionButtonExample extends StatefulWidget {
 class _FloatingActionButtonExampleState
     extends State<FloatingActionButtonExample> {
   final UserInfo userInfo = GetIt.instance<UserInfo>();
+  final LedgerByWallet ledgerByWallet = GetIt.instance<LedgerByWallet>();
   Future<void> _fetchDatas() async {
     //print("ERRORCHECCK1");
     final DataService dataService = GetIt.instance<DataService>();
@@ -33,8 +37,7 @@ class _FloatingActionButtonExampleState
       //     userInfo.uid!, userInfo.selectedledger))!;
       // BlocProvider.of<DataBloc>(context).add(DataFetchedEvent());
       // _sum();
-      var fetchedData =
-          await dataService.fetchDatas(userInfo.uid!, userInfo.selectedledger);
+      var fetchedData = await dataService.fetchDatas(userInfo.uid!);
 
       if (fetchedData != null && fetchedData.isNotEmpty) {
         setState(() {
@@ -59,18 +62,22 @@ class _FloatingActionButtonExampleState
     final DataUpdateService dataUpdateService =
         GetIt.instance<DataUpdateService>();
     final UserInfo userInfo = GetIt.instance<UserInfo>();
+
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyyMMdd').format(now);
     print("Format" + formattedDate);
     print("Insert ledger:" + userInfo.selectedledger);
+    print("inputDataPrice:" + inputedDataPrice.toString());
     try {
       dataUpdateService.insert_new_data(
-          userInfo.uid!,
-          userInfo.selectedledger,
-          inputedDataPrice!,
-          inputedDataName!,
-          inputedDataCategory!,
-          inputedDataDate!);
+        userInfo.uid!,
+        inputedDataPrice!,
+        inputedDataName!,
+        inputedDataCategory!,
+        inputedDataDate!,
+        inputedWalletid,
+        inputedLedgerid,
+      );
       await _fetchDatas();
       BlocProvider.of<DataBloc>(context).add(DataInsertEvent());
       print("Inserting Success");
@@ -84,6 +91,8 @@ class _FloatingActionButtonExampleState
   int? inputedDataPrice;
   String? inputedDataCategory;
   String? inputedDataDate;
+  int? inputedWalletid;
+  int? inputedLedgerid;
 
   TextEditingController dateController = TextEditingController();
 
@@ -108,6 +117,21 @@ class _FloatingActionButtonExampleState
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Wallet: ${userInfo.inputedWallet}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'Ledger: ${userInfo.inputedLedger}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                     Row(
                       children: [
                         Container(
@@ -120,6 +144,22 @@ class _FloatingActionButtonExampleState
                             icon: Icon(Icons.wallet_giftcard,
                                 color: Colors.white),
                             onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return WalletDialog(
+                                    onCategorySelected: (Wallet wallet) {
+                                      setState(() {
+                                        userInfo.inputedWallet = wallet.name;
+                                        inputedWalletid = ledgerByWallet.lid;
+                                        inputedLedgerid = ledgerByWallet.wid;
+                                        print("WalletID: $inputedWalletid");
+                                        print("LedgerID: $inputedLedgerid");
+                                      });
+                                    },
+                                  );
+                                },
+                              );
                               // Open Ledger Selection Dialog
                             },
                           ),
@@ -222,7 +262,7 @@ class _FloatingActionButtonExampleState
                           child: TextFormField(
                             controller: dateController,
                             decoration: InputDecoration(
-                              labelText: 'DD/MM/YYYY',
+                              labelText: 'YYYY/MM/DD',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
@@ -242,7 +282,7 @@ class _FloatingActionButtonExampleState
                               );
                               if (pickedDate != null) {
                                 String formattedDate =
-                                    DateFormat('dd/MM/yyyy').format(pickedDate);
+                                    DateFormat('yyyyMMdd').format(pickedDate);
                                 setState(() {
                                   dateController.text = formattedDate;
                                   inputedDataDate = formattedDate;
@@ -306,6 +346,7 @@ class _FloatingActionButtonExampleState
     return Container(
       height: 55,
       child: SpeedDial(
+        buttonSize: Size(40, 40),
         icon: Icons.add,
         activeIcon: Icons.close,
         backgroundColor: Color.fromARGB(255, 244, 138, 182),

@@ -4,7 +4,6 @@ import 'package:jimoney_frontend/feature/common/categories.dart';
 
 class CategoryDialog extends StatelessWidget {
   final Function(String) onCategorySelected;
-
   CategoryDialog({required this.onCategorySelected});
   @override
   Widget build(BuildContext context) {

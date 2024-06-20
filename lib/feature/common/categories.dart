@@ -40,7 +40,8 @@ class CategoryItem {
       CategoryItem(name: '薪水', icon: Icons.attach_money);
   static final CategoryItem invest =
       CategoryItem(name: '投資', icon: Icons.trending_up);
-
+  static final CategoryItem defaultItem =
+      CategoryItem(name: 'Default', icon: Icons.help_outline);
   // 静态方法根据枚举值创建对象
   factory CategoryItem.fromType(CategoryType type) {
     switch (type) {
@@ -65,7 +66,33 @@ class CategoryItem {
       case CategoryType.Invest:
         return invest;
       default:
-        throw Exception('Unknown CategoryType: $type');
+        return defaultItem;
+    }
+  }
+  factory CategoryItem.fromName(String name) {
+    switch (name) {
+      case '飲食':
+        return food;
+      case '日用':
+        return daily;
+      case '娛樂':
+        return entertainment;
+      case '交通':
+        return traffic;
+      case '服飾':
+        return cloth;
+      case '醫療':
+        return med;
+      case '教育':
+        return education;
+      case '其他':
+        return others;
+      case '薪水':
+        return salary;
+      case '投資':
+        return invest;
+      default:
+        return defaultItem;
     }
   }
 }

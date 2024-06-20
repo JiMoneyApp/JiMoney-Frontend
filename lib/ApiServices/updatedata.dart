@@ -1,34 +1,42 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:jimoney_frontend/DataBase/ledger.dart';
+import 'package:jimoney_frontend/DataBase/datas.dart';
 
 class DataUpdateService {
   final String baseUrl = 'http://54.179.125.22:5000';
 
-  Future<void> insert_new_data(int userId, String ledger_name, int price,
-      String data_name, String data_type, String data_date) async {
+  Future<void> insert_new_data(int userId, int price, String dname,
+      String dtype, String ddate, int? lid, int? gid) async {
     final url = Uri.parse(
-        "$baseUrl/data/insert_new_data?user_id=$userId&ledger_name=$ledger_name&price=$price&data_name=$data_name&data_type=$data_type&data_date=$data_date");
+        "$baseUrl/data/insert_data?user_id=$userId&price=$price&dname=$dname&dtype=$dtype&ddate=$ddate&lid=$lid&gid=$gid");
     try {
-      final response = await http.put(
+      final response = await http.post(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
           'user_id': userId,
-          'ledger_name': ledger_name,
           'price': price,
-          'data_name': data_name,
-          'data_type': data_type,
-          'data_date': data_date,
+          'dname': dname,
+          'dtype': dtype,
+          'ddate': ddate,
+          'lid': lid,
+          'gid': gid,
         }),
       );
       if (response.statusCode == 200) {
-        print('Insert Data:$data_name Successfully');
+        print('Insert Data:$dname Successfully');
         print("Response body: ${response.body}");
       } else {
-        print("Failed to insert data into $ledger_name");
+        print("userId: $userId");
+        print("Price: $price");
+        print("Dname: $dname");
+        print("Dtype: $dtype");
+        print("Ddate: $ddate");
+        print("Lid: $lid");
+        print("Gid: $gid");
+        print("Failed to insert data into userId = $userId");
         print("Response body: ${response.body}");
       }
     } catch (e) {
@@ -36,7 +44,7 @@ class DataUpdateService {
     }
   }
 
-  Future<String?> updateDataName(int userId, String ledger_name) async {
+  Future<void> updateDataName(int userId, String ledger_name) async {
     final url = Uri.parse(
         "$baseUrl/ledger/delete_ledger?user_id=$userId&ledger_name=$ledger_name");
     try {
@@ -59,25 +67,48 @@ class DataUpdateService {
     }
   }
 
-  Future<int?> updateDataPrice(
-      int userId, String old_ledger_name, String new_ledger_name) async {
+  Future<void> updateData(int userId, Datas new_data, int lid, int gid) async {
     final url = Uri.parse(
-        "$baseUrl/ledger/delete_ledger?user_id=$userId&old_ledger_name=$old_ledger_name&new_ledger_name=$new_ledger_name");
+        "$baseUrl/data/update_data?user_id=$userId&new_data=$new_data&lid=$lid&gid=$gid");
     try {
-      final response = await http.put(
+      final response = await http.post(
         url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
-        body: jsonEncode(<String, String>{
-          'new_ledger_name': new_ledger_name,
+        body: jsonEncode(<String, dynamic>{
+          'user_id': userId,
+          'new_data': new_data,
+          'lid': lid,
+          'gid': gid,
         }),
       );
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('UpdateData Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
-        print(
-            'Update Old Ledger:$old_ledger_name -> New Ledger:$new_ledger_name Successfully');
+        print('Update Successfully');
+      } else {
+        print("Failed to load data");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  Future<void> deleteData(int data_id) async {
+    final url = Uri.parse("$baseUrl/data/delete_data?data_id=$data_id");
+    try {
+      final response = await http.delete(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{'data_id': data_id}),
+      );
+      if (response.statusCode == 200) {
+        print('DeleteData Server response: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        print('Delete Data_id = $data_id Successfully');
       } else {
         print("Failed to load data");
       }
