@@ -43,7 +43,7 @@ class _ListOutputState extends State<ListOutput> {
       //   print("No data fetched or empty data received.");
       // }
       print("LEDGERResponse");
-      //print(fetchedData);
+      print(fetchedData);
       print("UL");
       print(userInfo.ledgerResponse);
       // userId
@@ -109,7 +109,7 @@ class _ListOutputState extends State<ListOutput> {
             builder: (context, state) {
               print("State: " + state.toString());
               if (state is DataFetchedState) {
-                List<Ledger> ledgerList = userInfo.ledgerResponse;
+                List<Datas> ledgerList = userInfo.ledgerResponse;
                 print("LEDGER");
                 return Container(
                   width: double.infinity,

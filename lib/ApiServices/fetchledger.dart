@@ -85,7 +85,7 @@ class LedgerService {
         }),
       );
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('FetchMyPartnerLedger Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
         return jsonDecode(response.body);
       } else {
@@ -102,7 +102,7 @@ class LedgerService {
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('FetchWalleetAllLedgers Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
         return jsonDecode(response.body);
       } else {
@@ -118,7 +118,7 @@ class LedgerService {
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('FetchAllLedgers Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
         return jsonDecode(response.body);
       } else {

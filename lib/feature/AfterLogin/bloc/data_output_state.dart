@@ -5,10 +5,10 @@ sealed class DataOutputState {}
 
 final class DataOutputInitial extends DataOutputState {}
 
-class DataLoadingState extends DataOutputState{}
+class DataLoadingState extends DataOutputState {}
 
 class DataLoadedState extends DataOutputState {
-  final List<Ledger> ledgers;
+  final List<Datas> ledgers;
 
   DataLoadedState(this.ledgers);
 
@@ -25,15 +25,15 @@ class DataErrorState extends DataOutputState {
   List<Object> get props => [message];
 }
 
-class DataAddedState extends DataOutputState{
-  final Ledger ledger;
+class DataAddedState extends DataOutputState {
+  final Datas ledger;
   DataAddedState(this.ledger);
 
   @override
   List<Object> get props => [ledger];
 }
 
-class DataDeletedState extends DataOutputState{
+class DataDeletedState extends DataOutputState {
   final int deletedData;
   DataDeletedState(this.deletedData);
 

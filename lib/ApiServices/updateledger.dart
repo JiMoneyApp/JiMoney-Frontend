@@ -66,7 +66,7 @@ class LedgerUpdateService {
         }),
       );
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('UpdateLedgerServer response: ${response.statusCode}');
         print('Response body: ${response.body}');
         print('Update New Ledger:$Lname Successfully');
       } else {

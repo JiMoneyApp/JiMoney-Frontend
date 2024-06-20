@@ -60,7 +60,7 @@ class DataUpdateService {
     }
   }
 
-  Future<void> updateData(int userId, Ledger new_data, int lid, int gid) async {
+  Future<void> updateData(int userId, Datas new_data, int lid, int gid) async {
     final url = Uri.parse(
         "$baseUrl/data/update_data?user_id=$userId&new_data=$new_data&lid=$lid&gid=$gid");
     try {
@@ -77,7 +77,7 @@ class DataUpdateService {
         }),
       );
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('UpdateData Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
         print('Update Successfully');
       } else {
@@ -99,7 +99,7 @@ class DataUpdateService {
         body: jsonEncode(<String, dynamic>{'data_id': data_id}),
       );
       if (response.statusCode == 200) {
-        print('Server response: ${response.statusCode}');
+        print('DeleteData Server response: ${response.statusCode}');
         print('Response body: ${response.body}');
         print('Delete Data_id = $data_id Successfully');
       } else {

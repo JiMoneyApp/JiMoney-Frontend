@@ -1,4 +1,4 @@
-class Ledger {
+class Datas {
   String? ddate;
   int? did;
   String? dname;
@@ -7,7 +7,7 @@ class Ledger {
   int? price;
   int? uid;
 
-  Ledger(
+  Datas(
       {this.ddate,
       this.did,
       this.dname,
@@ -16,7 +16,7 @@ class Ledger {
       this.price,
       this.uid});
 
-  Ledger.fromJson(Map<String, dynamic> json) {
+  Datas.fromJson(Map<String, dynamic> json) {
     ddate = json['ddate'];
     did = json['did'];
     dname = json['dname'];

@@ -10,7 +10,7 @@ class UserInfo {
   String noticetime = "";
   List<String> ledger = [];
   String selectedledger = "";
-  List<Ledger> ledgerResponse;
+  List<Datas> ledgerResponse;
   int sum;
   int? uid;
 
