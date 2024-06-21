@@ -28,7 +28,7 @@ class LedgerUpdateService {
     }
   }
 
-  Future<List<String>?> deleteLedger(int ledger_id) async {
+  Future<void> deleteLedger(int ledger_id) async {
     final url = Uri.parse("$baseUrl/ledger/delete_ledger?ledger_id=$ledger_id");
     try {
       final response = await http.delete(

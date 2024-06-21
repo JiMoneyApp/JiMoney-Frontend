@@ -90,7 +90,8 @@ class _ListOutputState extends State<ListOutput> {
     print(sum);
   }
 
-  void sortLedgerList() {
+  void sortLedgerList() async {
+    await _fetchDatas();
     setState(() {
       userInfo.ledgerResponse.sort((a, b) {
         if (userInfo.isSortedByNewestFirst) {
@@ -119,7 +120,7 @@ class _ListOutputState extends State<ListOutput> {
                 icon: Icon(userInfo.isSortedByNewestFirst
                     ? Icons.arrow_downward
                     : Icons.arrow_upward),
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     userInfo.isSortedByNewestFirst =
                         !userInfo.isSortedByNewestFirst;

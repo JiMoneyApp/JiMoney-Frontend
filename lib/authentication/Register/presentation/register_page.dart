@@ -69,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: TextStyle(
                                   decoration: TextDecoration.none,
                                   fontSize: 13,
-                                  color: Colors.black),
+                                  color: Colors.white),
                             )),
                         // Password
                         _passwordField(_passwordController, context),
